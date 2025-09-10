@@ -27,23 +27,13 @@ const InstructorSection = () => {
     <section className="w-full bg-black py-12 md:py-16 lg:py-24">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-12 lg:gap-16">
+          
           {/* Section Header */}
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 lg:gap-8">
             <div className="flex flex-col gap-4">
               <Button
                 text="Trainers"
                 className="bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_50%,#ffffff19_100%)] border border-[linear-gradient(180deg,#cb217d7f_0%,#e387b944_50%,#ffffff00_100%)] text-white text-2xl font-normal px-4 py-2 rounded-lg shadow-[0px_4px_13px_#888888ff] w-fit"
-                fill_background={true}
-                border_border_image=""
-                effect_box_shadow="0px_4px_13px_#888888ff"
-                layout_align_self="flex-start"
-                fill_background_color="linear-gradient(180deg,#ffffff19_0%,#ffffff19_50%,#ffffff19_100%)"
-                layout_width="fit-content"
-                padding="px-4 py-2"
-                position="static"
-                margin=""
-                variant="primary"
-                size="large"
                 onClick={() => {}}
               />
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px] text-left">
@@ -57,20 +47,20 @@ const InstructorSection = () => {
             </div>
             <div className="lg:w-[28%]">
               <p className="text-xl md:text-2xl font-poppins font-normal leading-relaxed text-[#94969c]">
-                Wide selection of expertise. language preference. gender selection.
+                Wide selection of expertise, language preference, and gender selection.
               </p>
             </div>
           </div>
 
           {/* Instructors Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[1760px]">
-            {instructors?.map((instructor) => (
-              <div key={instructor?.id} className="relative w-full">
+            {instructors.map((instructor) => (
+              <div key={instructor.id} className="relative w-full">
                 <div className="relative w-full h-[572px] rounded-xl overflow-hidden">
                   {/* Instructor Image */}
                   <img 
-                    src={instructor?.image} 
-                    alt={instructor?.name}
+                    src={instructor.image} 
+                    alt={instructor.name}
                     className="w-full h-full object-cover"
                   />
                   
@@ -81,11 +71,11 @@ const InstructorSection = () => {
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-[linear-gradient(180deg,#00000000_0%,#00000033_100%)] rounded-b-xl shadow-[0px_4px_13px_#888888ff]">
                     <div className="flex flex-col gap-1 items-center text-center">
                       <h3 className="text-2xl font-poppins font-bold leading-10 text-white mt-2">
-                        {instructor?.name}
+                        {instructor.name}
                       </h3>
                       <p className="text-xl font-poppins leading-9 text-white">
                         <span className="font-bold">Specialties: </span>
-                        <span className="font-normal">{instructor?.specialties}</span>
+                        <span className="font-normal">{instructor.specialties}</span>
                       </p>
                     </div>
                   </div>
@@ -93,6 +83,7 @@ const InstructorSection = () => {
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>

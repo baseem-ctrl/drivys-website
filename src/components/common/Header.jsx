@@ -15,15 +15,54 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-6 z-50 w-full bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_50%,#ffffff19_100%)] rounded-xl mx-8 my-6">
+      <header className="sticky top-6 z-50 w-full bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_100%,#ffffff19_100%)] rounded-xl mx-8 my-6 backdrop-blur-lg ">
         <div className="max-w-[1440px] mx-auto px-6 py-6">
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="w-[118px] h-[58px] flex-shrink-0">
               <img 
                 src="/images/img_logo.svg" 
                 alt="Drivys Logo" 
                 className="w-full h-full object-contain"
+              /> 
+            </div>
+
+            {/* Centered Nav */}
+            <div className="hidden lg:flex flex-1 justify-center">
+              <nav className="flex gap-[50px]">
+                {menuItems?.map((item, index) => (
+                  <button
+                    key={index}
+                    role="menuitem"
+                    className={`text-xl font-poppins leading-9 text-center transition-colors duration-200 hover:text-white ${
+                      item?.active 
+                        ? 'text-white font-bold' :'text-white/80 font-normal hover:font-semibold'
+                    }`}
+                  >
+                    {item?.text}
+                  </button>
+                ))}
+              </nav>
+            </div>
+
+            {/* Desktop Download Button */}
+            <div className="hidden lg:block">
+              <Button
+                text="Download Now"
+                className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] text-white text-[0px] font-bold leading-7 px-8 py-4 rounded-lg hover:opacity-90 transition-opacity duration-200"
+                fill_background=""
+                border_border_image=""
+                effect_box_shadow=""
+                layout_align_self=""
+                style={{ fontSize: '20px', lineHeight: '1.8rem' }}
+                fill_background_color=""
+                layout_width=""
+                padding=""
+                position=""
+                margin=""
+                variant=""
+                size=""
+                onClick={() => {}}
               />
             </div>
 
@@ -37,43 +76,6 @@ const Header = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center justify-between flex-1 ml-8">
-              {/* Navigation Menu */}
-              <nav className="flex items-center gap-[84px]">
-                {menuItems?.map((item, index) => (
-                  <button
-                    key={index}
-                    role="menuitem"
-                    className={`text-2xl font-poppins leading-9 text-center transition-colors duration-200 hover:text-white ${
-                      item?.active 
-                        ? 'text-white font-bold' :'text-white/80 font-normal hover:font-semibold'
-                    }`}
-                  >
-                    {item?.text}
-                  </button>
-                ))}
-              </nav>
-
-              {/* Download Button */}
-              <Button
-                text="Download Now"
-                className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] text-white text-2xl font-bold leading-9 px-8 py-4 rounded-lg hover:opacity-90 transition-opacity duration-200"
-                fill_background=""
-                border_border_image=""
-                effect_box_shadow=""
-                layout_align_self=""
-                fill_background_color=""
-                layout_width=""
-                padding=""
-                position=""
-                margin=""
-                variant=""
-                size=""
-                onClick={() => {}}
-              />
-            </div>
           </div>
 
           {/* Mobile Navigation Menu */}
@@ -96,7 +98,7 @@ const Header = () => {
               <div className="mt-4">
                 <Button
                   text="Download Now"
-                  className="w-full bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] text-white text-xl font-bold leading-7 px-6 py-3 rounded-lg hover:opacity-90 transition-opacity duration-200"
+                  className="w-full bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] text-white text-[10px] font-bold leading-7 px-6 py-3 rounded-lg hover:opacity-90 transition-opacity duration-200"
                   fill_background=""
                   border_border_image=""
                   effect_box_shadow=""

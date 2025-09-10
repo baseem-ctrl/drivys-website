@@ -20,6 +20,7 @@ const HeroSection = () => {
           <div className="flex flex-col lg:flex-row justify-start items-center w-full mt-8 lg:mt-16 mb-16 lg:mb-32">
             <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
               <img 
+              style={{ width: '75%', height: 'auto' }}
                 src="/images/img_logo_animation_2.gif" 
                 alt="Drivys Animation" 
                 className="w-full max-w-[880px] h-auto object-contain"
@@ -49,19 +50,27 @@ const HeroSection = () => {
       </div>
       
       {/* Brand Logos Continuous Sliding */}
-      <div className="w-full overflow-hidden py-8 bg-gradient-to-r from-transparent via-[#141414] to-transparent relative">
+      <div className="w-full overflow-hidden py-8 bg-gradient-to-r from-transparent to-transparent relative">
         <div className="flex animate-slide whitespace-nowrap gap-16">
           {[...Array(2)].map((_, i) => (
             <React.Fragment key={i}>
-              <img src="/images/img_image_1.png" alt="Logo 1" className="w-[86px] h-[86px] object-contain opacity-70" />
-              <img src="/images/img_image_23.png" alt="Logo 2" className="w-[88px] h-[72px] object-contain opacity-70" />
-              <img src="/images/img_image_24.png" alt="Logo 3" className="w-[122px] h-[66px] object-contain opacity-70" />
-              <img src="/images/img_image_25.png" alt="Logo 4" className="w-[52px] h-[98px] object-contain opacity-70" />
-              <img src="/images/img_image_26.png" alt="Logo 5" className="w-[48px] h-[80px] object-contain opacity-70" />
-              <img src="/images/img_image_27.png" alt="Logo 6" className="w-[100px] h-[98px] object-contain opacity-70" />
-              <img src="/images/img_image_28.png" alt="Logo 7" className="w-[78px] h-[100px] object-contain opacity-70" />
-              <img src="/images/img_image_1.png" alt="Logo 8" className="w-[86px] h-[86px] object-contain opacity-70" />
-              <img src="/images/img_image_23_72x42.png" alt="Logo 9" className="w-[42px] h-[72px] object-contain opacity-70" />
+              <img src="/images/Logo01.png" alt="Logo 1" className="w-[160px]  object-contain opacity-70" />
+              <img src="/images/Logo02.png" alt="Logo 2" className="w-[160px] object-contain opacity-70" />
+              <img src="/images/Logo03.png" alt="Logo 3" className="w-[160px]  object-contain opacity-70" />
+              <img src="/images/Logo04.png" alt="Logo 4" className="w-[160px] object-contain opacity-70" />
+              <img src="/images/Logo05.png" alt="Logo 5" className="w-[160px]  object-contain opacity-70" />
+              <img src="/images/Logo06.png" alt="Logo 6" className="w-[160px] object-contain opacity-70" />
+              <img src="/images/Logo07.png" alt="Logo 7" className="w-[160px] object-contain opacity-70" />
+                            <img src="/images/Logo08.png" alt="Logo 7" className="w-[160px] object-contain opacity-70" />
+
+              <img src="/images/Logo09.png" alt="Logo 7" className="w-[160px] object-contain opacity-70" />
+
+              <img src="/images/Logo10.png" alt="Logo 7" className="w-[160px] object-contain opacity-70" />
+
+              <img src="/images/Logo11.png" alt="Logo 7" className="w-[160px] object-contain opacity-70" />
+
+              <img src="/images/Logo12.png" alt="Logo 7" className="w-[160px] object-contain opacity-70" />
+
             </React.Fragment>
           ))}
         </div>

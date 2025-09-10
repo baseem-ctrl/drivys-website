@@ -128,7 +128,7 @@ const Card = ({ option, index }) => {
         <div className="w-full md:w-1/2 flex justify-center">
           <img
             src={option.vehicleImage}
-            alt={option.title}
+            
             className="max-w-[500px] w-full object-contain"
           />
         </div>
