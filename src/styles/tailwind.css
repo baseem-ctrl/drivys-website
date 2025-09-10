@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Global Text Colors */
+    --text-primary: #000000;
+    --text-secondary: #94969c;
+    --text-accent: #f68c2d;
+    --text-white: #ffffff;
+    --text-white-muted: #ffffffcc;
+
+    /* Global Background Colors */
+    --bg-primary: #000000;
+    --bg-dark: #121212;
+    --bg-darker: #141414;
+    --bg-darker-transparent: #1414147f;
+    --bg-gray: #333333;
+    --bg-secondary: #94969c;
+    --bg-accent: #f68c2d;
+    --bg-white: #ffffff;
+    --bg-white-transparent: #ffffff66;
+
+    /* Global Border Colors */
+    --border-gray: #333333;
+    --border-accent: #cb217d7f;
+    --border-white: #ffffff;
+
+    /* Typography Variables */
+    --font-size-sm: 14px;
+    --font-size-base: 17px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 22px;
+    --font-size-3xl: 24px;
+    --font-size-4xl: 25px;
+    --font-size-5xl: 26px;
+    --font-size-6xl: 28px;
+    --font-size-7xl: 32px;
+    --font-size-8xl: 48px;
+    --font-size-9xl: 52px;
+    --font-size-10xl: 54px;
+
+    /* Font Weight Variables */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+
+    /* Line Height Variables */
+    --line-height-tight: 18px;
+    --line-height-snug: 20px;
+    --line-height-normal: 21px;
+    --line-height-relaxed: 23px;
+    --line-height-loose: 30px;
+    --line-height-xl: 36px;
+    --line-height-2xl: 42px;
+    --line-height-3xl: 48px;
+    --line-height-4xl: 66px;
+    --line-height-5xl: 72px;
+
+    /* Spacing Variables */
+    --spacing-xs: 4px;
+    --spacing-sm: 6px;
+    --spacing-md: 8px;
+    --spacing-lg: 10px;
+    --spacing-xl: 12px;
+    --spacing-2xl: 14px;
+    --spacing-3xl: 16px;
+    --spacing-4xl: 18px;
+    --spacing-5xl: 20px;
+    --spacing-6xl: 22px;
+    --spacing-7xl: 24px;
+    --spacing-8xl: 26px;
+    --spacing-9xl: 28px;
+    --spacing-10xl: 30px;
+    --spacing-11xl: 32px;
+    --spacing-12xl: 34px;
+
+    /* Border Radius Variables */
+    --radius-none: 0px;
+    --radius-sm: 10px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-2xl: 40px;
+    --radius-3xl: 48px;
+    --radius-4xl: 54px;
+
+    /* Component-specific Colors */
+    --header-border: var(--border-accent);
+    --header-bg: transparent;
+
+    --button-bg-primary: var(--bg-darker);
+    --button-text-primary: var(--text-white);
+    --button-border-primary: var(--border-accent);
+    --button-border-secondary: var(--border-white);
+
+    --line-bg-primary: var(--bg-secondary);
+    --line-bg-accent: var(--bg-accent);
+    --line-bg-transparent: var(--bg-white-transparent);
+    --line-border: var(--border-gray);
+
+    --footer-bg: transparent;
+    --footer-text: var(--text-white);
+
+    --link-text: var(--text-white);
+  }
+}
