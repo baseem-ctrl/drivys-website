@@ -20,7 +20,7 @@ const HeroSection = () => {
           <div className="flex flex-col lg:flex-row justify-start items-center w-full mt-8 lg:mt-16 mb-16 lg:mb-32">
             <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
               <img 
-              style={{ width: '75%', height: 'auto' }}
+                style={{ width: '75%', height: 'auto' }}
                 src="/images/img_logo_animation_2.gif" 
                 alt="Drivys Animation" 
                 className="w-full max-w-[880px] h-auto object-contain"
