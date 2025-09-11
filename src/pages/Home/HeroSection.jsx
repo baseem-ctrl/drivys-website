@@ -12,12 +12,12 @@ const HeroSection = () => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 m">
         <div className="flex flex-col justify-start items-center w-full">
           <Header />
           
           {/* Hero Content */}
-          <div className="flex flex-col lg:flex-row justify-start items-center w-full mt-8 lg:mt-16 mb-16 lg:mb-32">
+          <div className="flex flex-col lg:flex-row justify-start items-center w-full mt-8 lg:mt-16 mb-16 lg:mb-32 " style={{ marginTop: '10%' }}>
             <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
               <img 
               style={{ width: '75%', height: 'auto' }}
