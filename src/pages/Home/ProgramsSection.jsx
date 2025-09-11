@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../components/ui/Button';
+import AppStoreButtons from '../../components/common/AppStoreButtons'; // 1. IMPORT the component
 
 const features = [
     {
@@ -86,8 +87,6 @@ const ProgramsSection = () => {
                                     </div>
                                     <h3 className="text-2xl md:text-3xl font-bold text-white">{feature.title}</h3>
                                     <p className="text-gray-400 flex-1">{feature.description}</p>
-
-                                    {/* Animated Accent Line applied to all */}
                                     <div className="relative w-full h-[2px] rounded bg-gray-800 overflow-hidden">
                                         <div className="absolute left-0 top-0 h-full w-full bg-orange-500 shadow-md origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
                                     </div>
@@ -100,23 +99,8 @@ const ProgramsSection = () => {
                                     <h4 className="text-2xl md:text-3xl font-semibold text-white mb-6">
                                         Download Now
                                     </h4>
-                                    <div className="flex flex-col sm:flex-row gap-8 w-full justify-center items-center mt-12">
-                                        {/* Google Play Card */}
-                                        <div className="relative flex-1 max-w-xs h-48 bg-white/10 backdrop-blur-md rounded-3xl flex flex-col items-center justify-center shadow-xl hover:scale-105 hover:shadow-2xl transition-transform duration-300 cursor-pointer">
-                                            <div className="w-20 h-20 bg-white/20 backdrop-blur-lg rounded-full flex items-center justify-center shadow-md animate-pulse">
-                                                <img src="/images/img_x34_2_google_play.png" alt="Google Play" className="w-10 h-10 object-contain" />
-                                            </div>
-                                            <span className="mt-4 text-white font-semibold text-lg">Google Play</span>
-                                        </div>
-
-                                        {/* App Store Card */}
-                                        <div className="relative flex-1 max-w-xs h-48 bg-white/10 backdrop-blur-md rounded-3xl flex flex-col items-center justify-center shadow-xl hover:scale-105 hover:shadow-2xl transition-transform duration-300 cursor-pointer">
-                                            <div className="w-20 h-20 bg-white/20 backdrop-blur-lg rounded-full flex items-center justify-center shadow-md animate-pulse">
-                                                <img src="/images/img_image_2.png" alt="App Store" className="w-10 h-10 object-contain" />
-                                            </div>
-                                            <span className="mt-4 text-white font-semibold text-lg">App Store</span>
-                                        </div>
-                                    </div>
+                                    {/* 2. REPLACE the icon cards with the component */}
+                                    <AppStoreButtons className="justify-center mt-4" />
                                 </div>
                             )}
                         </div>
