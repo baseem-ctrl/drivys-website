@@ -1,132 +1,107 @@
-import React from 'react';
-import { Shield, Calendar, DollarSign, Award } from 'lucide-react';
+import React, { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const WhyChooseUsSection = () => {
-    const features = [
-        {
-            id: 1,
-            icon: Award,
-            title: 'Certified & Trusted',
-            subtitle: 'Instructor',
-            description: 'Learn from certified instructors you can trust for a safe and confident driving experience.',
-            bgColor: 'bg-gray-800',
-            rotation: '-rotate-6'
-        },
-        {
-            id: 2,
-            icon: Shield,
-            title: 'On-demand',
-            subtitle: 'Scheduling',
-            description: 'Learn whenever you want with flexible, on-demand driving sessions.',
-            bgColor: 'bg-gradient-to-br from-orange-500 to-orange-600',
-            rotation: 'rotate-3'
-        },
-        {
-            id: 3,
-            icon: Calendar,
-            title: 'Transparent',
-            subtitle: 'Pricing',
-            description: 'Clear, upfront pricing with no hidden fees—what you see is what you pay.',
-            bgColor: 'bg-gray-800',
-            rotation: '-rotate-3'
-        },
-        {
-            id: 4,
-            icon: DollarSign,
-            title: 'Innovative',
-            subtitle: 'Methods',
-            description: 'Modern learning techniques to maximize your driving skills efficiently.',
-            bgColor: 'bg-gray-800',
-            rotation: 'rotate-6'
-        }
-    ];
+  const features = [
+    { id: 1, icon: "/images/img_fi_3172183.svg", title: "Certified & Trusted", subtitle: "Instructor", description: "Learn from certified instructors you can trust for a safe and confident driving experience.", bgColor: "bg-[#141414]" },
+    { id: 2, icon: "/images/img_fi_2053323.svg", title: "On-demand", subtitle: "Scheduling", description: "Learn whenever you want with flexible, on-demand driving sessions.", bgColor: "bg-gradient-to-r from-[#f68b2c] to-[#c05a00]" },
+    { id: 3, icon: "/images/img_fi_10692577.png", title: "Transparent", subtitle: "Pricing", description: "Clear, upfront pricing with no hidden fees—what you see is what you pay.", bgColor: "bg-[#141414]" },
+    { id: 4, icon: "/images/img_fi_3798638.svg", title: "Nationally Recognized", subtitle: "Training", description: "Trusted and recognized across the country for quality driving education.", bgColor: "bg-gradient-to-r from-[#f68b2c] to-[#c05a00]" },
+    { id: 5, icon: "/images/img_fi_13496067.svg", title: "Modern learning", subtitle: "Experience", description: "Experience driving education with the latest tools and innovative teaching methods.", bgColor: "bg-[#141414]" },
+  ];
 
-    return (
-        <section className="w-full bg-black py-16 lg:py-24 overflow-hidden">
-            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-                    {/* Left Content */}
-                    <div className="w-full lg:w-2/5 flex-shrink-0">
-                        <div className="flex flex-col gap-8">
-                            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-left">
-                                <span className="text-white">
-                                  Why Choose Us –
-                                </span>
-                                <br />
-                                <span className="text-white">
-                                  Experience the
-                                </span>
-                                <br />
-                                <span className="text-white">
-                                  Drivys Difference
-                                </span>
-                            </h2>
-                            <p className="text-xl lg:text-2xl font-normal leading-relaxed text-gray-400">
-                                Your all-in-one platform to manage every step of your driving journey.
-                            </p>
-                        </div>
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  const leftContentRef = useRef(null);
+
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      const scrollDistance = trackRef.current.scrollWidth - trackRef.current.parentElement.clientWidth;
+
+      // Scroll animation timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: () => `+=${scrollDistance}`,
+          scrub: 1,
+          pin: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      tl.to(trackRef.current, { x: -scrollDistance, ease: "none" })
+        .to(leftContentRef.current, { opacity: 0, ease: "none" }, "<");
+
+      // Hover effect for left content fade
+      const cards = trackRef.current.querySelectorAll(".feature-card");
+      cards.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          gsap.to(leftContentRef.current, { opacity: 0.05, duration: 0.3 });
+        });
+        card.addEventListener("mouseleave", () => {
+          gsap.to(leftContentRef.current, { opacity: 1, duration: 0.3 });
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="w-full bg-black py-16 md:py-20 lg:py-28 overflow-hidden">
+      <div className="w-full max-w-[1440px] mx-auto relative h-full flex flex-col lg:flex-row gap-10 lg:gap-16 items-start lg:items-center px-4 lg:px-8">
+
+        {/* Left Content */}
+        <div ref={leftContentRef} className="w-full lg:w-[36%] flex-shrink-0 z-10">
+          <div className="flex flex-col gap-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-poppins font-black leading-tight lg:leading-[72px] text-left">
+              <span className="block">Why Choose Us –</span>
+              <span className="block bg-gradient-to-r from-[#ccc] via-white to-[#ccc] bg-clip-text text-transparent">
+                Experience the Drivys Difference
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl font-poppins text-[#94969c] lg:w-[80%] leading-relaxed">
+              Your all-in-one platform to manage every step of your driving journey.
+            </p>
+          </div>
+        </div>
+
+        {/* Right Content */}
+        <div className="absolute top-0 right-0 h-full w-full lg:w-[64%] flex items-center z-20">
+          <div ref={trackRef} className="flex gap-6 min-w-max pl-4">
+            {features.map((feature, index) => {
+              const rotation = index % 2 === 0 ? "rotate-[-5deg]" : "rotate-[5deg]";
+              return (
+                <div
+                  key={feature.id}
+                  className={`feature-card ${feature.bgColor} rounded-2xl shadow-xl hover:scale-[1.02] transition-transform duration-300 flex-shrink-0 ${rotation}`}
+                  style={{ width: "380px" }}
+                >
+                  <div className="flex flex-col gap-6 lg:gap-8 h-full p-6 lg:p-8">
+                    <div className="w-fit border border-white/30 rounded-full p-5 shadow-[0_4px_24px_rgba(255,255,255,0.2)]">
+                      <img src={feature.icon} alt={feature.title} className="w-[54px] h-[54px] object-contain" />
                     </div>
-
-                    {/* Right Content - Cards Container */}
-                    <div className="w-full lg:flex-1 relative">
-                        {/* Horizontal scrolling container */}
-                        <div className="flex overflow-x-auto gap-6 pb-8 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                            {features.map((feature, index) => {
-                                const IconComponent = feature.icon;
-                                return (
-                                    <div
-                                        key={feature.id}
-                                        className={`flex-shrink-0 ${feature.bgColor} ${feature.rotation} rounded-2xl p-8 shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-3xl`}
-                                        style={{
-                                            width: '280px',
-                                            height: '320px',
-                                            minWidth: '280px'
-                                        }}
-                                    >
-                                        <div className="flex flex-col gap-6 h-full">
-                                            {/* Icon Circle */}
-                                            <div className="w-16 h-16 bg-transparent border-2 border-white/20 rounded-full flex items-center justify-center">
-                                                <IconComponent className="w-8 h-8 text-white" strokeWidth={1.5} />
-                                            </div>
-
-                                            {/* Content */}
-                                            <div className="flex flex-col gap-4 flex-1">
-                                                {/* Title and Subtitle */}
-                                                <div className="flex flex-col gap-1">
-                                                    <h3 className="text-2xl font-bold text-white leading-tight">
-                                                        {feature.title}
-                                                    </h3>
-                                                    <p className="text-lg font-medium text-white/90">
-                                                        {feature.subtitle}
-                                                    </p>
-                                                </div>
-
-                                                {/* Description */}
-                                                <p className="text-base font-normal leading-relaxed text-white/80 mt-auto">
-                                                    {feature.description}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
+                    <div className="flex flex-col gap-4 flex-1">
+                      <div>
+                        <h3 className="text-2xl md:text-3xl font-bold text-white">{feature.title}</h3>
+                        <p className="text-lg text-white/80">{feature.subtitle}</p>
+                      </div>
+                      <p className="text-base md:text-lg font-light text-white leading-relaxed mt-auto">{feature.description}</p>
                     </div>
+                  </div>
                 </div>
-            </div>
+              );
+            })}
+          </div>
+        </div>
 
-            {/* Hide scrollbar styles */}
-            <style jsx>{`
-                .scrollbar-hide {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-            `}</style>
-        </section>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default WhyChooseUsSection;

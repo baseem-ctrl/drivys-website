@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import Button from '../../components/ui/Button';
 
 const FAQSection = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
+
 
   const faqs = [
     {
@@ -46,7 +48,6 @@ const FAQSection = () => {
   const toggleFAQ = (id) => {
     setOpenFAQ(openFAQ === id ? null : id);
   };
-
   return (
     <section className="w-full bg-black py-12 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-10 lg:gap-16">
@@ -56,15 +57,18 @@ const FAQSection = () => {
           <div className="flex flex-col gap-3">
             <Button
               text="Trainers"
-              className="text-white text-2xl font-normal px-4 py-2 rounded-lg w-fit"
+              className=" text-white text-2xl font-normal px-4 py-2 rounded-lg
+                            w-fit"
             />
             <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px]">
-              <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
-                Learn From
-              </span>
-              <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent">
-                The Best
-              </span>
+                            <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)]
+                               bg-clip-text text-transparent">
+                                Learn From
+                            </span>
+              <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)]
+                               bg-clip-text text-transparent">
+                                The Best
+                            </span>
             </h2>
           </div>
           <div className="lg:w-[28%]">
@@ -74,7 +78,7 @@ const FAQSection = () => {
           </div>
         </div>
 
-        {/* FAQ List */}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {faqs.map((faq) => (
             <div
@@ -87,7 +91,9 @@ const FAQSection = () => {
                   {faq.question}
                 </h3>
                 <button
-                  className={`w-7 h-7 flex items-center justify-center rounded-full border border-gray-500 text-white text-2xl transform transition-transform duration-300 ${openFAQ === faq.id ? "rotate-45" : ""}`}
+                  className={`w-7 h-7 flex items-center justify-center rounded-full border border-gray-500 text-white text-2xl transform transition-transform duration-300 ${
+                    openFAQ === faq.id ? "rotate-45" : ""
+                  }`}
                 >
                   +
                 </button>
