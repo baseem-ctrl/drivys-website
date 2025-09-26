@@ -25,30 +25,30 @@ const buttonClasses = cva(
 );
 
 const Button = ({
-                    text = "",
-                    text_font_size = "text-6xl",
-                    text_font_family = "Century Gothic",
-                    text_font_weight = "font-bold",
-                    text_line_height = "leading-xl",
-                    text_text_align = "left",
-                    text_color = "text-text-white",
+    text = "",
+    text_font_size = "text-md",
+    text_font_family = "poppins",
+    text_font_weight = "",
+    text_line_height = "leading-xl",
+    text_text_align = "left",
+    text_color = "text-text-white",
 
-                    fill_background,
-                    layout_align_self,
-                    layout_width,
-                    padding,
-                    position,
-                    margin,
+    fill_background,
+    layout_align_self,
+    layout_width,
+    padding,
+    position,
+    margin,
 
-                    variant,
-                    size,
-                    disabled = false,
-                    className,
-                    children,
-                    onClick,
-                    type = "button",
-                    ...props
-                }) => {
+    variant,
+    size,
+    disabled = false,
+    className,
+    children,
+    onClick,
+    type = "button",
+    ...props
+}) => {
 
     const optionalClasses = [
         layout_width ? `w-[${layout_width}]` : '',
@@ -57,17 +57,23 @@ const Button = ({
         position ? position : '',
         fill_background ? `bg-[${fill_background}]` : '',
         layout_align_self ? `self-${layout_align_self}` : '',
-    ]?.filter(Boolean)?.join(' ');
+    ].filter(Boolean).join(' ');
 
     const buttonStyles = {
-        fontSize: text_font_size === "text-6xl" ? "28px" : text_font_size,
-        fontFamily: text_font_family || 'Century Gothic',
-        fontWeight: text_font_weight === "font-bold" ? "700" : text_font_weight,
+        fontSize: text_font_size ===  text_font_size,
+        fontFamily: text_font_family || 'poppins',
+        fontWeight: text_font_weight === text_font_weight,
         lineHeight: text_line_height === "leading-xl" ? "35px" : text_line_height,
         textAlign: text_text_align || 'left',
         color: text_color === "text-text-white" ? "#ffffff" : text_color,
-        border: '1px solid #ffffff',  // thin modern border
-        borderRadius: '6px',           // slight rounding
+        borderRadius: '6px',
+        padding: '4px 8px',
+        position: 'relative',
+        zIndex: 0,
+        border: '1px solid transparent',
+        backgroundImage: `linear-gradient(${fill_background || '#000'}, ${fill_background || '#000'}), linear-gradient(90deg, #CB217D80 0%, #E388B945 26.9%, #FFFFFF 500%)`,
+        backgroundOrigin: 'border-box',
+        backgroundClip: 'padding-box, border-box',
     };
 
     const handleClick = (event) => {

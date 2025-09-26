@@ -43,7 +43,7 @@ const VehicleTrainingSection = () => {
           <div className="flex flex-col gap-3">
             <Button
               text="Vehicle Options"
-              className="text-white text-2xl font-normal px-4 py-2 rounded-lg w-fit"
+              className="!border-white !bg-none !bg-transparent !text-white text-2xl font-normal px-4 py-2 rounded-lg w-fit transition-colors hover:!text-black hover:!border-black"
             />
             <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px]">
               <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
@@ -91,42 +91,51 @@ const Card = ({ option, index }) => {
       style={{ y, zIndex: index + 1 }}
       whileHover={{ backgroundColor: option.hoverColor }}
       transition={{ duration: 0.5 }}
-      className="sticky top-24 w-full bg-[#141414] rounded-2xl p-8 md:p-12 shadow-2xl mb-20 group"
+      className="group sticky top-24 w-full bg-[#141414] rounded-2xl p-8 md:p-12 shadow-2xl mb-20"
     >
       <div className="flex flex-col md:flex-row gap-10 items-start md:items-center">
+        {/* Left Side */}
         <div className="w-full md:w-1/2 flex flex-col gap-6">
+          {/* Number Button */}
           <Button
             text={option.number}
-            className="border border-white text-white text-4xl md:text-5xl font-bold px-6 py-4 rounded-sm w-fit group-hover:text-black transition-colors"
+            className="!border-white !bg-none !bg-transparent !text-white text-4xl md:text-5xl font-bold px-6 py-4 rounded-sm w-fit transition-colors group-hover:!text-black group-hover:!border-black"
           />
-          <h3 className="text-4xl md:text-5xl font-extrabold text-[#f68c2d] group-hover:text-black transition-colors">
+
+          {/* Title */}
+          <h3 className="text-4xl md:text-5xl font-extrabold text-[#f68c2d] transition-colors group-hover:text-black">
             {option.title}
           </h3>
-          <p className="text-lg md:text-xl text-white group-hover:text-black transition-colors">
+
+          {/* Description */}
+          <p className="text-lg md:text-xl text-white transition-colors group-hover:text-black">
             {option.description}
           </p>
 
+          {/* Features */}
           <div className="flex flex-col gap-3">
             {option.features.map((feature, i) => (
               <div key={i} className="flex items-center gap-3">
                 <img
                   src="/images/img_frame.svg"
-                  className="w-6 h-6"
+                  className="w-6 h-6 transition-all"
                   alt="feature"
                 />
-                <span className="text-white group-hover:text-black transition-colors text-lg">
+                <span className="text-white text-lg transition-colors group-hover:text-black">
                   {feature}
                 </span>
               </div>
             ))}
           </div>
 
+          {/* CTA Button */}
           <Button
             text="Choose Vehicle"
-            className="border border-white text-white text-xl font-bold px-4 py-2 rounded-lg w-fit mt-6 group-hover:text-black transition-colors"
+            className="!border-white !bg-none !bg-transparent !text-white text-xl font-bold px-4 py-2 rounded-lg w-fit mt-6 transition-colors group-hover:!text-black group-hover:!border-black"
           />
         </div>
 
+        {/* Right Side (Vehicle Image) */}
         <div className="w-full md:w-1/2 flex justify-center">
           <img
             src={option.vehicleImage}

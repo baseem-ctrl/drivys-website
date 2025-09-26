@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Button from '../../components/ui/Button';
+import React, { useState } from "react";
+import Button from "../../components/ui/Button";
 
 const FAQSection = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -50,7 +50,6 @@ const FAQSection = () => {
   return (
     <section className="w-full bg-black py-12 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-10 lg:gap-16">
-
         {/* Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-6">
           <div className="flex flex-col gap-3">
@@ -60,7 +59,7 @@ const FAQSection = () => {
             />
             <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px]">
               <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
-                Learn From
+                Learn From{" "}
               </span>
               <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent">
                 The Best
@@ -69,7 +68,8 @@ const FAQSection = () => {
           </div>
           <div className="lg:w-[28%]">
             <p className="text-sm md:text-xl font-poppins font-normal leading-relaxed text-[#94969c]">
-              Wide selection of expertise, language preference, and gender selection.
+              Wide selection of expertise, language preference, and gender
+              selection.
             </p>
           </div>
         </div>
@@ -87,16 +87,18 @@ const FAQSection = () => {
                   {faq.question}
                 </h3>
                 <button
-                  className={`w-7 h-7 flex items-center justify-center rounded-full border border-gray-500 text-white text-2xl transform transition-transform duration-300 ${openFAQ === faq.id ? "rotate-45" : ""}`}
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-500 text-white text-lg font-bold leading-none"
                 >
-                  +
+                  {openFAQ === faq.id ? "↑" : "↓"}
                 </button>
               </div>
 
               {/* Answer */}
               <div
                 className={`grid transition-all duration-300 ease-in-out overflow-hidden ${
-                  openFAQ === faq.id ? "grid-rows-[1fr] mt-4 pt-4 border-t border-gray-700" : "grid-rows-[0fr]"
+                  openFAQ === faq.id
+                    ? "grid-rows-[1fr] mt-4 pt-4 border-t border-gray-700"
+                    : "grid-rows-[0fr]"
                 }`}
               >
                 <div className="overflow-hidden">
@@ -108,7 +110,6 @@ const FAQSection = () => {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

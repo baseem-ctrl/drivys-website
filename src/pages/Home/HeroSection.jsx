@@ -37,6 +37,7 @@ const HeroSection = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      {/* Hero Content Wrapper */}
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-start items-center w-full">
           <Header />
@@ -107,41 +108,47 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Brand Logos Continuous Sliding */}
+      {/* Smooth Brand Logos Carousel */}
       <div className="w-full overflow-hidden py-6 sm:py-8 relative bg-gradient-to-r from-transparent to-transparent">
         <motion.div
-          className="flex gap-6 sm:gap-8 min-w-max"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          className="flex gap-6 sm:gap-8"
+          style={{
+            width: "max-content",
+            display: "flex",
+            animation: "scroll 40s linear infinite",
+          }}
         >
+          {/* Repeat logos twice for seamless scroll */}
           {[...Array(2)].map((_, i) =>
             logos.map((logo, idx) => (
-              <motion.div
+              <div
                 key={`${i}-${idx}`}
                 className="relative w-[80px] sm:w-[120px] md:w-[160px] flex-shrink-0"
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <motion.img
+                <img
                   src={logo.gray}
                   alt={logo.alt}
-                  className="w-full h-auto object-contain"
-                  initial={{ opacity: 1 }}
-                  whileHover={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  className="w-full h-auto object-contain transition-opacity duration-500"
                 />
-                <motion.img
+                <img
                   src={logo.color}
                   alt={logo.alt}
-                  className="absolute top-0 left-0 w-full h-auto object-contain opacity-0"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
+                  className="absolute top-0 left-0 w-full h-auto object-contain opacity-0 hover:opacity-100 transition-opacity duration-500"
                 />
-              </motion.div>
+              </div>
             ))
           )}
         </motion.div>
+
+        {/* Keyframes for smooth infinite scroll */}
+        <style>
+          {`
+            @keyframes scroll {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+          `}
+        </style>
       </div>
     </section>
   );

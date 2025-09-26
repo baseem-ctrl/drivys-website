@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-6 z-50 w-full bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_100%,#ffffff19_100%)] rounded-xl mx-8 my-6 backdrop-blur-lg ">
+      <header className="sticky top-6 z-50 w-full bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_100%,#ffffff19_100%)] rounded-xl  my-6 backdrop-blur-lg ">
         <div className="max-w-[1440px] mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             {/* Logo */}

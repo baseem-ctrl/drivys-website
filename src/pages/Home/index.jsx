@@ -21,13 +21,19 @@ const Home = () => {
         />
         <meta property="og:title" content="Professional Driving School | Certified Instructors & Flexible Training | Drivys" />
         <meta property="og:description" content="Learn to drive with certified professional instructors at Drivys. Choose from car, bus, and truck training programs with flexible scheduling, real-time booking, and comprehensive packages starting from 599 AED. Trusted by 1000+ students across the UAE." />
-      </Helmet>
+      </Helmet>  
 
       <main className="w-full bg-black">
         <HeroSection />
         <InstructorSection />
         <ProgramsSection />
-        <WhyChooseUsSection />
+
+        {/* Desktop Version: Horizontal scroll with GSAP */}
+        <div className="hidden lg:block">
+          <WhyChooseUsSection />
+        </div>
+
+  
         <VehicleTrainingSection />
         <PricingSection />
         <TestimonialsSection />

@@ -37,19 +37,18 @@ const InstructorSection = () => {
   return (
     <section className="w-full bg-black py-12 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-10 lg:gap-16">
-
         {/* Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div className="flex flex-col gap-3 text-center lg:text-left">
             <Button
               text="Trainers"
-              className="text-white text-xl sm:text-2xl font-normal px-4 py-2 rounded-lg w-fit mx-auto lg:mx-0"
+              className="text-white text-md sm:text-2xl font-normal px-4 py-2 rounded-lg w-fit mx-auto lg:mx-0"
             />
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-poppins font-bold leading-snug lg:leading-[78px]">
-              <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent block">
+              <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent inline-block">
                 Learn From
               </span>
-              <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent block">
+              <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent inline-block ml-2">
                 The Best
               </span>
             </h2>
@@ -73,7 +72,6 @@ const InstructorSection = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: index * 0.2 }}
             >
-
               {/* Instructor Image with parallax hover */}
               <motion.img
                 src={instructor.image}
@@ -92,7 +90,7 @@ const InstructorSection = () => {
 
               {/* Glassy Info Card with glow */}
               <motion.div
-                className="absolute bottom-4 left-4 right-4 p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 group-hover:shadow-[0_0_40px_#f68b2c80] transition-shadow duration-500"
+                className="absolute bottom-4 left-4 right-4 p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20  transition-shadow duration-500"
                 whileHover={{ y: -10 }}
               >
                 <motion.h3
@@ -109,11 +107,9 @@ const InstructorSection = () => {
                   {instructor.specialties}
                 </motion.p>
               </motion.div>
-
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
