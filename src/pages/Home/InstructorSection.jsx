@@ -35,7 +35,13 @@ const InstructorSection = () => {
   };
 
   return (
-    <section className="w-full bg-black py-12 lg:py-20">
+    <motion.section
+      className="w-full bg-black py-12 lg:py-20"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 1.2, ease: 'easeOut' }}
+    >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-10 lg:gap-16">
         {/* Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
@@ -70,13 +76,17 @@ const InstructorSection = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: index * 0.2 }}
+              transition={{ delay: index * 0.1 }}
             >
               {/* Instructor Image with parallax hover */}
               <motion.img
                 src={instructor.image}
                 alt={instructor.name}
                 className="w-full h-full object-cover rounded-xl transform transition-transform duration-700 ease-out group-hover:scale-110"
+                initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1.2, delay: index * 0.3, ease: 'easeOut' }}
               />
 
               {/* Overlay shimmer */}
@@ -88,7 +98,7 @@ const InstructorSection = () => {
                 />
               </div>
 
-              {/* Glassy Info Card with glow */}
+              {/* Glassy Info Card */}
               <motion.div
                 className="absolute bottom-4 left-4 right-4 p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20  transition-shadow duration-500"
                 whileHover={{ y: -10 }}
@@ -111,7 +121,7 @@ const InstructorSection = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

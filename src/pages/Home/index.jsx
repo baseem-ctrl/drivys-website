@@ -27,6 +27,7 @@ const Home = () => {
         <HeroSection />
         <InstructorSection />
         <ProgramsSection />
+        
 
         {/* Desktop Version: Horizontal scroll with GSAP */}
         <div className="hidden lg:block">

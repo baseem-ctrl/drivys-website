@@ -271,6 +271,9 @@ const Trainer = () => {
               </div>
             </motion.section>
 
+
+
+
             {/* Features Section */}
             <section className="w-full py-[20px] md:py-[35px] lg:py-[45px] lg:px-12">
               <div className="w-full max-w-[1760px] mx-auto px-6 sm:px-8 lg:px-0">

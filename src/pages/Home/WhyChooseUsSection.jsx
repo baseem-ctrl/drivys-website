@@ -61,6 +61,7 @@ const WhyChooseUsSection = () => {
     if (window.innerWidth < 1024) return;
 
     let ctx = gsap.context(() => {
+      
       const scrollDistance =
         trackRef.current.scrollWidth -
         trackRef.current.parentElement.clientWidth;

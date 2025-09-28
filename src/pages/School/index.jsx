@@ -182,6 +182,8 @@ const School = () => {
               </div>
             </section>
 
+            
+
             <motion.section
               ref={sectionRef}
               className="w-full px-4 sm:px-6 lg:pl-[106px] lg:pr-[89px] py-0"
