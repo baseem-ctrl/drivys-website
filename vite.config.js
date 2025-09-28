@@ -25,5 +25,12 @@ export default defineConfig({
     host: "0.0.0.0",
     strictPort: true,
     allowedHosts: ['.amazonaws.com', '.builtwithrocket.new']
-  }
+  },
+   theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'], // ✅ make font-sans = Poppins
+      },
+    },
+  },
 });

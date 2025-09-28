@@ -275,7 +275,7 @@ const Trainer = () => {
 
 
             {/* Features Section */}
-            <section className="w-full py-[20px] md:py-[35px] lg:py-[45px] lg:px-12">
+            <section className="w-full py-[20px] md:py-[35px] lg:py-[45px] lg:px-12 font-[Poppins]">
               <div className="w-full max-w-[1760px] mx-auto px-6 sm:px-8 lg:px-0">
                 <div className="flex flex-col lg:flex-row gap-[40px] md:gap-[60px] lg:gap-[80px] w-full">
                   {/* Left Column */}
