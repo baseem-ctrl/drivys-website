@@ -1,37 +1,35 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import Button from "../../components/ui/Button";
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Button from '../../components/ui/Button';
 
 const VehicleTrainingSection = () => {
   const trainingOptions = [
     {
       id: 1,
-      number: "01",
-      title: "Car",
-      description:
-        "Learn everyday driving skills for city and highway roads with confidence.",
-      features: ["Automatic", "Manual"],
-      vehicleImage: "/images/img_vector.png",
-      hoverColor: "#6EBF75", // Green
+      number: '01',
+      title: 'Car',
+      description: 'Learn everyday driving skills for city and highway roads with confidence.',
+      features: ['Automatic', 'Manual'],
+      vehicleImage: '/images/img_vector.png',
+      hoverColor: '#6EBF75', // Green
     },
     {
       id: 2,
-      number: "02",
-      title: "Bus",
-      description: "Get trained for public transport and commercial bus driving.",
-      features: ["Automatic", "Manual"],
-      vehicleImage: "/images/img_vector_white_a700_296x562.png",
-      hoverColor: "#FBBC01", // Yellow
+      number: '02',
+      title: 'Bus',
+      description: 'Get trained for public transport and commercial bus driving.',
+      features: ['Automatic', 'Manual'],
+      vehicleImage: '/images/img_vector_white_a700_296x562.png',
+      hoverColor: '#FBBC01', // Yellow
     },
     {
       id: 3,
-      number: "03",
-      title: "Truck",
-      description:
-        "Master heavy vehicle handling for logistics and long-distance routes.",
-      features: ["Automatic", "Manual"],
-      vehicleImage: "/images/img_group_179.png",
-      hoverColor: "#D52C2C", // Red
+      number: '03',
+      title: 'Truck',
+      description: 'Master heavy vehicle handling for logistics and long-distance routes.',
+      features: ['Automatic', 'Manual'],
+      vehicleImage: '/images/img_group_179.png',
+      hoverColor: '#D52C2C', // Red
     },
   ];
 
@@ -39,37 +37,33 @@ const VehicleTrainingSection = () => {
     <section className="w-full bg-black py-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-6 mb-20">
-          <div className="flex flex-col gap-3">
-            <Button
-              text="Vehicle Options"
-              className="!border-white !bg-none !bg-transparent !text-white text-2xl font-normal px-4 py-2 rounded-lg w-fit transition-colors hover:!text-black hover:!border-black"
-            />
-            <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px]">
-              <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
-                Choose Your{" "}
-              </span>
-              <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent">
-                Training Path
-              </span>
-            </h2>
-          </div>
-          <div className="lg:w-[28%]">
-            <p className="text-sm md:text-xl font-poppins font-normal leading-relaxed text-[#94969c]">
-              With 400+ active vehicles, we deliver reliable and timely service.
-            </p>
-          </div>
-        </div>
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-4 lg:gap-6 mb-20">
+  <div className="flex flex-col gap-3 items-start text-left">
+    <Button
+      text="Vehicle Options"
+      className="text-white text-md sm:text-2xl font-normal px-4 py-2 rounded-lg w-fit mx-0"
+    />
+    <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px]">
+      <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
+        Choose Your{" "}
+      </span>
+      <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent">
+        Training Path
+      </span>
+    </h2>
+  </div>
+  <div className="lg:w-[28%] text-center lg:text-left mt-4 lg:mt-0">
+    <p className="text-sm md:text-xl font-poppins font-normal leading-relaxed text-[#94969c]">
+      With 400+ active vehicles, we deliver reliable and timely service.
+    </p>
+  </div>
+</div>
+
 
         {/* Cards */}
         <div className="relative">
           {trainingOptions.map((option, index) => (
-            <Card
-              key={option.id}
-              option={option}
-              index={index}
-              total={trainingOptions.length}
-            />
+            <Card key={option.id} option={option} index={index} total={trainingOptions.length} />
           ))}
         </div>
       </div>
@@ -81,7 +75,7 @@ const Card = ({ option, index }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ['start end', 'end start'],
   });
   const y = useTransform(scrollYProgress, [0, 1], [index * 50, 0]);
 
@@ -116,11 +110,7 @@ const Card = ({ option, index }) => {
           <div className="flex flex-col gap-3">
             {option.features.map((feature, i) => (
               <div key={i} className="flex items-center gap-3">
-                <img
-                  src="/images/img_frame.svg"
-                  className="w-6 h-6 transition-all"
-                  alt="feature"
-                />
+                <img src="/images/img_frame.svg" className="w-6 h-6 transition-all" alt="feature" />
                 <span className="text-white text-lg transition-colors group-hover:text-black">
                   {feature}
                 </span>
