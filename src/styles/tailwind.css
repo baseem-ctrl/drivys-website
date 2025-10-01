@@ -12,9 +12,10 @@
     --text-white-muted: #ffffffcc;
 
     /* Global Background Colors */
-    --bg-primary: #000000;
+    
+    --bg-primary: #212121;
     --bg-dark: #121212;
-    --bg-darker: #141414;
+    --bg-darker: #212121;
     --bg-darker-transparent: #1414147f;
     --bg-gray: #333333;
     --bg-secondary: #94969c;

@@ -13,10 +13,8 @@ const features = [
   },
   {
     id: 2,
-    icon: '/images/img_fi_69856.svg',
-    title: 'Track your progress',
-    description:
-      'Track your progress step-by-step, ensuring you are always moving forward with confidence.',
+    imageOnly: true,
+    image: '/images/mid.jpeg',
     hasDownloadSection: true
   },
   {
@@ -28,8 +26,8 @@ const features = [
   },
   {
     id: 4,
-    icon: '/images/img_fi_566718.svg',
-    title: 'In-app communication',
+    icon: '/images/img_fi_69856.svg',
+    title: 'Track your progress',
     description:
       'Smooth coordination between you and your instructor, enhancing your learning experience.'
   },
@@ -79,44 +77,78 @@ const ProgramsSection = () => {
           {features.map((feature) => (
             <motion.div
               key={feature.id}
-              className={`flex flex-col gap-6 group ${feature.hasDownloadSection ? 'lg:row-span-2' : ''}`}
+              className={`flex flex-col gap-6 ${feature.hasDownloadSection ? 'lg:row-span-2' : ''}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, delay: feature.id * 0.1 }}
             >
-              {/* Feature Card */}
-              <div className="bg-[#121212] rounded-md p-6 lg:p-8 flex flex-col h-full hover:scale-[1.03] transition-transform duration-300 shadow-lg">
-                <div className="flex flex-col h-full justify-between gap-4">
-                  <div>
-                    <motion.div
-                      className="w-fit p-4 rounded-[40px] shadow-lg"
-                      style={{ background: 'linear-gradient(to top right, #ffffff40, #ffffff00)' }}
-                      whileHover={{
-                        rotateY: 180,
-                        scale: 1.1,
-                        background: [
-                          'linear-gradient(to top right, #ffffff40, #ffffff00)',
-                          'linear-gradient(to top right, #f68b2c, #c05a00)'
-                        ],
-                      }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    >
-                      <img
-                        src={feature.icon}
-                        alt={feature.title}
-                        className="w-12 h-12 object-contain"
-                      />
-                    </motion.div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mt-4">{feature.title}</h3>
-                    <p className="text-gray-400 mt-2">{feature.description}</p>
+              {/* Image-only feature with zoom effect */}
+              {feature.imageOnly ? (
+                <motion.div
+                  className="w-full h-full cursor-pointer overflow-hidden rounded-md shadow-lg"
+                  whileHover="hover"
+                >
+                  <motion.img
+                    src={feature.image}
+                    alt="Track your progress"
+                    className="w-full h-full object-cover rounded-md"
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                  />
+                </motion.div>
+              ) : (
+                // Feature Card
+                <motion.div
+                  className="bg-[#121212] rounded-md p-6 lg:p-8 flex flex-col h-full hover:scale-[1.03] transition-transform duration-300 shadow-lg group"
+                  initial="initial"
+                  whileHover="hover"
+                  style={{ perspective: 1000 }}
+                >
+                  <div className="flex flex-col h-full justify-between gap-4">
+                    <div>
+                      <motion.div
+                        className="w-fit p-4 rounded-[40px] shadow-lg"
+                        style={{
+                          background:
+                            'linear-gradient(to top right, #ffffff40, #ffffff00)',
+                          transformStyle: 'preserve-3d'
+                        }}
+                        variants={{
+                          initial: {
+                            rotateY: 0,
+                            scale: 1,
+                            background:
+                              'linear-gradient(to top right, #ffffff40, #ffffff00)'
+                          },
+                          hover: {
+                            rotateY: 180,
+                            scale: 1.1,
+                            background:
+                              'linear-gradient(to top right, #f68b2c, #c05a00)'
+                          }
+                        }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      >
+                        <img
+                          src={feature.icon}
+                          alt={feature.title}
+                          className="w-12 h-12 object-contain"
+                        />
+                      </motion.div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mt-4">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-400 mt-2">{feature.description}</p>
+                    </div>
+                    {/* Bottom bar */}
+                    <div className="relative w-full h-[2px] rounded bg-gray-800 overflow-hidden mt-6">
+                      <div className="absolute left-0 top-0 h-full w-full bg-orange-500 shadow-md origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
                   </div>
-                  {/* Bottom bar */}
-                  <div className="relative w-full h-[2px] rounded bg-gray-800 overflow-hidden mt-6">
-                    <div className="absolute left-0 top-0 h-full w-full bg-orange-500 shadow-md origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
-                  </div>
-                </div>
-              </div>
+                </motion.div>
+              )}
 
               {/* Download Section for special feature */}
               {feature.hasDownloadSection && (

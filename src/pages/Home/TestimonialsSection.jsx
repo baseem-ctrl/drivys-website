@@ -3,15 +3,15 @@ import Button from "@/components/ui/Button.jsx";
 
 const TestimonialsSection = () => {
   const testimonials = [
-    { id: 1, name: "Alex Prokhorov", username: "@alex_pro_dsg", image: "/images/img_ellipse_8.png", text: "Stunning. I can finally make this link in bio website haha", verified: true },
-    { id: 2, name: "Lam'aan", username: "@lamaandesign", image: "/images/img_ellipse_8_98x98.png", text: "Love the work on this one. Waitlisted and excited to see where it goes!", verified: false },
-    { id: 3, name: "Brett", username: "@thebtjackson", image: "/images/img_ellipse_8_1.png", text: "I like this a lot. Signed up!", verified: true },
-    { id: 4, name: "Dmitry Zhomir", username: "@DemetriusZhomir", image: "/images/img_ellipse_8_2.png", text: "You've un-ugly'fied this stuff!", verified: false },
-    { id: 5, name: "Hewar", username: "@hewarsaber", image: "/images/img_ellipse_8.png", text: "If Linktree had taste, it'd look like this 🔥", verified: true },
-    { id: 6, name: "Chinaa", username: "@chinwechinaa", image: "/images/img_ellipse_8_1.png", text: "this is so good 😍 ❤️ 💯", verified: false },
-    { id: 7, name: "Jagdev Soni", username: "@SoniJagdev", image: "/images/img_ellipse_8_2.png", text: "Visually popsite looks better", verified: true },
-    { id: 8, name: "Ali", username: "@aaalixyz", image: "/images/img_ellipse_8.png", text: "Let me innnnnnnn", verified: false },
-    { id: 9, name: "Brian Ca", username: "@iambrianconnor", image: "/images/img_ellipse_8_1.png", text: "Its sooooo good", verified: true }
+    { id: 1, name: "Ahmed Khan", username: "@ahmed_khan", image: "/images/img_ellipse_8.png", text: "Stunning. I can finally make this link in bio website haha", verified: true, rating: 5 },
+    { id: 2, name: "Fatima Noor", username: "@fatima_noor", image: "/images/img_ellipse_8_98x98.png", text: "Love the work on this one. Waitlisted and excited to see where it goes!", verified: false, rating: 4 },
+    { id: 3, name: "Omar Ali", username: "@omar_ali", image: "/images/img_ellipse_8_1.png", text: "I like this a lot. Signed up!", verified: true, rating: 5 },
+    { id: 4, name: "Aisha Siddiqui", username: "@aisha_sidd", image: "/images/img_ellipse_8_2.png", text: "You've un-ugly'fied this stuff!", verified: false, rating: 4 },
+    { id: 5, name: "Hassan Riaz", username: "@hassan_riaz", image: "/images/img_ellipse_8.png", text: "If Linktree had taste, it'd look like this 🔥", verified: true, rating: 5 },
+    { id: 6, name: "Maryam Akbar", username: "@maryam_akb", image: "/images/img_ellipse_8_1.png", text: "This is so good 😍 ❤️ 💯", verified: false, rating: 4 },
+    { id: 7, name: "Yusuf Malik", username: "@yusuf_malik", image: "/images/img_ellipse_8_2.png", text: "Visually popsite looks better", verified: true, rating: 5 },
+    { id: 8, name: "Zainab Shah", username: "@zainab_shah", image: "/images/img_ellipse_8.png", text: "Let me innnnnnnn", verified: false, rating: 4 },
+    { id: 9, name: "Bilal Qureshi", username: "@bilal_qureshi", image: "/images/img_ellipse_8_1.png", text: "Its sooooo good", verified: true, rating: 5 }
   ];
 
   // Arrange columns for continuous scrolling
@@ -19,6 +19,26 @@ const TestimonialsSection = () => {
   const column2 = [...testimonials.slice(3, 6), ...testimonials.slice(0, 3), ...testimonials.slice(3, 6)];
   const column3 = [...testimonials.slice(6, 9), ...testimonials.slice(3, 6), ...testimonials.slice(6, 9)];
   const columns = [column1, column2, column3];
+
+  // Function to render stars
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <svg
+          key={i}
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill={i < rating ? "#f5c518" : "#555"}
+          className="inline-block"
+        >
+          <path d="M12 .587l3.668 7.431L24 9.587l-6 5.845 1.416 8.267L12 18.896 4.584 23.699 6 15.432 0 9.587l8.332-1.569z" />
+        </svg>
+      );
+    }
+    return <div className="flex gap-1">{stars}</div>;
+  };
 
   return (
     <section className="w-full bg-black py-12 lg:py-20 relative overflow-hidden">
@@ -56,12 +76,12 @@ const TestimonialsSection = () => {
             <div
               key={colIndex}
               className="scroll-column flex flex-col gap-4 pt-4"
-              style={{ animationDuration: `${20 + colIndex * 5}s` }} // faster speed
+              style={{ animationDuration: `${20 + colIndex * 5}s` }}
             >
               {columnTestimonials.map((testimonial, index) => (
                 <div
                   key={`${colIndex}-${index}`}
-                  className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl p-4 md:p-5 flex flex-col gap-3 cursor-pointer min-h-[120px] transition-all duration-200 hover:bg-[#252525] hover:translate-y-[-2px] hover:shadow-[0_8px_25px_rgba(0,0,0,0.4)]"
+                  className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl p-4 md:p-5 flex flex-col gap-3 cursor-pointer min-h-[140px] transition-all duration-200 hover:bg-[#252525] hover:translate-y-[-2px] hover:shadow-[0_8px_25px_rgba(0,0,0,0.4)]"
                 >
                   <div className="flex items-center gap-3">
                     <img
@@ -80,6 +100,8 @@ const TestimonialsSection = () => {
                         <span className="text-[#888] text-xs ml-1">𝕏</span>
                       </div>
                       <span className="text-[#666] text-xs md:text-sm">{testimonial.username}</span>
+                      {/* Stars */}
+                      {renderStars(testimonial.rating)}
                     </div>
                   </div>
                   <p className="text-[#e1e5e9] text-sm md:text-base">{testimonial.text}</p>

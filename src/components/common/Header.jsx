@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Button from "../ui/Button";
 
+
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation(); // Get current route

@@ -44,8 +44,8 @@ const WhyChooseUsSection = () => {
     },
     {
       id: 5,
-      icon: "/images/img_fi_13496067.svg",
-      title: "Modern learning",
+      icon: "/images/Layer_1.png",
+      title: "Eco Driving",
       subtitle: "Experience",
       description:
         "Experience driving education with the latest tools and innovative teaching methods.",

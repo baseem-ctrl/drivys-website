@@ -86,11 +86,12 @@ const FAQSection = () => {
                 <h3 className="text-lg md:text-xl font-poppins font-medium text-white pr-4">
                   {faq.question}
                 </h3>
-                <button
-                  className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-500 text-white text-lg font-bold leading-none"
-                >
-                  {openFAQ === faq.id ? "↑" : "↓"}
-                </button>
+          <button
+  className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-500 text-white text-lg font-bold leading-none"
+>
+  {openFAQ === faq.id ? "-" : "+"}
+</button>
+
               </div>
 
               {/* Answer */}

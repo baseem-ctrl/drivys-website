@@ -134,62 +134,64 @@ const Student = () => {
             </div>
 
             {/* Hero Section */}
-            <section className="w-full px-4 sm:px-6 lg:px-[80px]">
+              <section className="w-full px-4 sm:px-6 lg:px-[80px]">
               <div className="w-full max-w-[1760px] mx-auto">
                 <div
-                  className="relative w-full rounded-[24px] overflow-hidden"
+                  className="relative w-full rounded-[24px] overflow-hidden flex items-center"
                   style={{
                     backgroundImage: 'url(/images/img_image_29.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
+                    minHeight: '360px', // ensures enough height for centering
                   }}
                 >
-                  <div className="flex flex-col lg:flex-row justify-start items-end w-full min-h-[200px] md:min-h-[280px] lg:min-h-[360px]">
-                    <div className="flex flex-col lg:flex-row justify-center items-start w-full mt-[20px] md:mt-[32px] lg:mt-[40px]">
-                      <div className="flex flex-col justify-start items-start w-full lg:w-[58%] mt-[24px] md:mt-[36px] lg:mt-[48px] px-4 lg:px-[48px]">
-                        {/* Breadcrumb */}
-                        <div className="bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_50%,#ffffff19_100%)] border border-solid border-transparent rounded-[10px] px-[8px] md:px-[12px] lg:px-[16px] py-[4px] md:py-[6px] lg:py-[8px]">
-                          <p
-                            className="text-base md:text-lg lg:text-xl font-normal leading-[22px] md:leading-[26px] lg:leading-[30px] text-left text-white"
-                            style={{ fontFamily: 'Poppins' }}
-                          >
-                            <span className="text-white">Home / </span>
-                            <span className="text-white font-semibold">Student</span>
-                          </p>
-                        </div>
-
-                        {/* Main Heading */}
-                        <h1
-                          className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-[38px] sm:leading-[48px] md:leading-[68px] text-left mt-2 md:mt-3 lg:mt-4"
-                          style={{
-                            fontFamily: 'Poppins',
-                            background:
-                              'linear-gradient(270deg, #cccccc 0%, #ffffff 50%, #cccccc 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                          }}
-                        >
-                          Master Skills. Drive safely.
-                        </h1>
-
-                        {/* Description */}
+                  <div className="flex flex-col lg:flex-row justify-between items-center w-full px-4 lg:px-[48px]">
+                    {/* Text Area */}
+                    <div className="flex flex-col justify-center items-start w-full lg:w-[58%]">
+                      {/* Breadcrumb */}
+                      <div className="bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_50%,#ffffff19_100%)] border border-solid border-transparent rounded-[10px] px-[8px] md:px-[12px] lg:px-[16px] py-[4px] md:py-[6px] lg:py-[8px]">
                         <p
-                          className="text-base md:text-xl lg:text-2xl font-normal leading-[24px] md:leading-[30px] lg:leading-[34px] text-left text-[#94969c] w-full lg:w-[64%] mt-2 md:mt-3 lg:mt-4"
+                          className="text-base md:text-lg lg:text-xl font-normal leading-[22px] md:leading-[26px] lg:leading-[30px] text-left text-white"
                           style={{ fontFamily: 'Poppins' }}
                         >
-                          Your journey to becoming a confident driver starts here.
+                          <span className="text-white">Home / </span>
+                          <span className="text-white font-semibold">Students</span>
                         </p>
                       </div>
 
-                      {/* Hero Image */}
-                      <div className="w-full lg:w-[38%] flex justify-center items-center mt-6 lg:mt-0"></div>
+                      {/* Main Heading */}
+                      <h1
+                        className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-[38px] sm:leading-[48px] md:leading-[68px] text-left mt-2"
+                        style={{
+                          fontFamily: 'Poppins',
+                          background:
+                            'linear-gradient(270deg, #cccccc 0%, #ffffff 50%, #cccccc 100%)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                        }}
+                      >
+                        About Drivys
+                      </h1>
+
+                      {/* Description */}
+                      <p
+                        className="text-base md:text-xl lg:text-2xl font-normal leading-[24px] md:leading-[30px] lg:leading-[34px] text-left text-[#94969c] w-full lg:w-[64%] mt-2"
+                        style={{ fontFamily: 'Poppins' }}
+                      >
+                        Drivys makes learning to drive simple, safe, and flexible with trusted
+                        instructors and modern tools.
+                      </p>
                     </div>
+
+                    {/* Hero Image */}
+                    <div className="w-full lg:w-[38%] flex justify-center items-center"></div>
                   </div>
                 </div>
               </div>
             </section>
+
             {/* Features & App Section */}
             <section className="w-full bg-black py-[50px] md:py-[75px] lg:py-[100px] px-4 sm:px-6 lg:px-[80px]">
               <div className="w-full max-w-[1760px] mx-auto">

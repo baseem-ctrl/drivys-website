@@ -8,6 +8,10 @@ import About from './pages/About';
 import Trainer from './pages/Trainers';
 import Student from './pages/Student';
 import School from './pages/School';
+import Policy from './pages/Policy/Policy';
+import Terms from './pages/Terms/Terms';
+import Support from './pages/Support';
+import Partners from './pages/Collaburation';
 
 const AppRoutes = () => {
   return (
@@ -20,7 +24,10 @@ const AppRoutes = () => {
         <Route path="/trainer" element={<Trainer />} />
         <Route path="/student" element={<Student />} />
         <Route path="/school" element={<School />} />
-        
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/support" element={<Support/>} />
+        <Route path="/partners" element={<Partners />} />
       </Routes>
     </Router>
   );

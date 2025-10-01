@@ -19,8 +19,8 @@ const Footer = () => {
   const supportLinks = [
     { text: 'Join Us', href: '#' },
     { text: 'Support', href: '#' },
-    { text: 'Terms & Policies', href: '#' },
-    { text: 'Privacy Policy', href: '#' },
+    { text: 'Terms & Policies', href: '/terms' },
+    { text: 'Privacy Policy', href: '/policy' },
   ];
 
   return (

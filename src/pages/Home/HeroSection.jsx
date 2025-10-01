@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Header from '../../components/common/Header';
 import AppStoreButtons from '../../components/common/AppStoreButtons';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   const logos = [
@@ -125,21 +126,23 @@ const HeroSection = () => {
         >
           {[...Array(2)].map((_, i) =>
             logos.map((logo, idx) => (
-              <div
-                key={`${i}-${idx}`}
-                className="relative w-[clamp(60px,10vw,200px)] flex-shrink-0"
-              >
-                <img
-                  src={logo.gray}
-                  alt={logo.alt}
-                  className="w-full h-auto object-contain transition-opacity duration-500"
-                />
-                <img
-                  src={logo.color}
-                  alt={logo.alt}
-                  className="absolute top-0 left-0 w-full h-auto object-contain opacity-0 hover:opacity-100 transition-opacity duration-500"
-                />
-              </div>
+              <Link to="/partners">
+                <div
+                  key={`${i}-${idx}`}
+                  className="relative w-[clamp(60px,10vw,200px)] flex-shrink-0"
+                >
+                  <img
+                    src={logo.gray}
+                    alt={logo.alt}
+                    className="w-full h-auto object-contain transition-opacity duration-500"
+                  />
+                  <img
+                    src={logo.color}
+                    alt={logo.alt}
+                    className="absolute top-0 left-0 w-full h-auto object-contain opacity-0 hover:opacity-100 transition-opacity duration-500"
+                  />
+                </div>
+              </Link>
             ))
           )}
         </motion.div>

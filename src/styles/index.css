@@ -11,3 +11,20 @@ html, body {
 *, *::before, *::after {
   box-sizing: inherit;
 }
+/* Hide scrollbar for all browsers */
+.scrollbar-none {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Opera */
+}
+
+@keyframes slideLeft {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-[slideLeft_1s_linear_infinite] {
+  animation: slideLeft 1s linear infinite;
+}

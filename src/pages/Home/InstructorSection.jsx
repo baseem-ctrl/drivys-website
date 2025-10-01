@@ -3,26 +3,29 @@ import { motion } from 'framer-motion';
 import Button from '../../components/ui/Button';
 
 const InstructorSection = () => {
-  const instructors = [
-    {
-      id: 1,
-      name: 'Michael Chen',
-      image: '/images/img_instructor_1.png',
-      specialties: 'Automatic | Manual | Defensive Driving',
-    },
-    {
-      id: 2,
-      name: 'Lynn P. Holt',
-      image: '/images/img_instructor_3.png',
-      specialties: 'Automatic | Manual | Defensive Driving',
-    },
-    {
-      id: 3,
-      name: 'Scott Everett',
-      image: '/images/img_instructor_2.png',
-      specialties: 'Automatic | Manual | Defensive Driving',
-    },
-  ];
+const instructors = [
+  {
+    id: 1,
+    name: 'Ahmed Falasi',
+    image: '/images/img_instructor_1.png',
+    specialties: 'Learn from Ahmed and become a confident driver in no time!',
+  },
+  {
+    id: 2,
+    name: 'Omar Nuaimi ',
+    image: '/images/img_instructor_3.png',
+        specialties: 'Choose Omar to turn driving lessons into a smooth and enjoyable journey!',
+
+    
+  },
+  {
+    id: 3,
+    name: 'Fatima Shehhi',
+    image: '/images/img_instructor_2.png',
+    specialties: 'Fatima’s expert guidance ensures you master every driving skill safely!',
+  },
+];
+
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50, scale: 0.95 },
@@ -36,21 +39,21 @@ const InstructorSection = () => {
 
   return (
     <motion.section
-      className="w-full bg-black py-12 lg:py-20"
+      className="w-full bg-black pt-20 pb-12 lg:pt-24 lg:pb-20 px-4 sm:px-6 lg:px-8"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 1.2, ease: 'easeOut' }}
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-10 lg:gap-16">
+      <div className="max-w-[1440px] mx-auto flex flex-col gap-10 lg:gap-16">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-          <div className="flex flex-col gap-3 text-center lg:text-left">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-6 flex-wrap w-full">
+          <div className="flex flex-col gap-3 w-full lg:w-auto">
             <Button
               text="Trainers"
-              className="text-white text-md sm:text-2xl font-normal px-4 py-2 rounded-lg w-fit mx-auto lg:mx-0"
+              className="text-white text-sm sm:text-base md:text-lg font-normal px-4 py-2 rounded-lg w-fit"
             />
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-poppins font-bold leading-snug lg:leading-[78px]">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[52px] font-poppins font-bold leading-snug lg:leading-[78px]">
               <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent inline-block">
                 Learn From
               </span>
@@ -59,19 +62,19 @@ const InstructorSection = () => {
               </span>
             </h2>
           </div>
-          <div className="lg:w-[28%] mt-4 lg:mt-0 text-center lg:text-left">
-            <p className="text-sm sm:text-base md:text-lg font-poppins font-normal leading-relaxed text-[#94969c]">
+          <div className="lg:w-[28%] mt-4 lg:mt-0 w-full">
+            <p className="text-xs sm:text-sm md:text-base font-poppins font-normal leading-relaxed text-[#94969c]">
               Wide selection of expertise, language preference, and gender selection.
             </p>
           </div>
         </div>
 
         {/* Instructors Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-10">
           {instructors.map((instructor, index) => (
             <motion.div
               key={instructor.id}
-              className="relative w-full h-[420px] sm:h-[480px] lg:h-[520px] rounded-xl overflow-hidden cursor-pointer shadow-lg group"
+              className="relative w-full h-auto sm:h-[400px] md:h-[450px] lg:h-[520px] rounded-xl overflow-hidden cursor-pointer shadow-lg group"
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
@@ -82,11 +85,11 @@ const InstructorSection = () => {
               <motion.img
                 src={instructor.image}
                 alt={instructor.name}
-                className="w-full h-full object-cover rounded-xl transform transition-transform duration-700 ease-out group-hover:scale-110"
-                initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                className="w-full h-full object-cover rounded-xl transform transition-transform duration-700 ease-out group-hover:scale-105"
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 1.2, delay: index * 0.3, ease: 'easeOut' }}
+                transition={{ duration: 1, delay: index * 0.3, ease: 'easeOut' }}
               />
 
               {/* Overlay shimmer */}
@@ -100,20 +103,20 @@ const InstructorSection = () => {
 
               {/* Glassy Info Card */}
               <motion.div
-                className="absolute bottom-4 left-4 right-4 p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20  transition-shadow duration-500"
-                whileHover={{ y: -10 }}
+                className="absolute bottom-3 left-3 right-3 p-3 sm:p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 transition-shadow duration-500"
+                whileHover={{ y: -8 }}
               >
                 <motion.h3
-                  className="text-lg sm:text-xl md:text-2xl font-poppins font-bold text-white text-center"
-                  whileHover={{ scale: 1.05, opacity: 1 }}
+                  className="text-base sm:text-lg md:text-xl font-poppins font-bold text-white text-center"
+                  whileHover={{ scale: 1.03 }}
                 >
                   {instructor.name}
                 </motion.h3>
                 <motion.p
-                  className="text-sm sm:text-base md:text-md font-poppins text-white text-center mt-1"
+                  className="text-xs sm:text-sm md:text-base font-poppins text-white text-center mt-1"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <span className="font-bold">Specialties: </span>
+                  <span className="font-bold"> </span>
                   {instructor.specialties}
                 </motion.p>
               </motion.div>
