@@ -1,118 +1,87 @@
-// SctrollAnimation.jsx
-import React, { useEffect, useRef } from "react";
-import SwiperCore, { Pagination, Mousewheel } from "swiper";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// import Swiper styles
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { motion } from 'framer-motion';
 
-// register modules
-SwiperCore.use([Pagination, Mousewheel]);
-
-const trainingOptions = [
+const slides = [
   {
     id: 1,
-    title: "Car",
+    image: "/images/slide1.jpg",
+    title: "Learn Driving with",
+    highlight: "Confidence",
     description:
-      "Learn everyday driving skills for city and highway roads with confidence.",
-    features: ["Automatic", "Manual"],
-    vehicleImage: "/images/img_vector.png",
-    hoverColor: "#6EBF75",
+      "Our experienced male trainers guide you step by step, making driving lessons safe, comfortable, and tailored to your pace.",
   },
   {
     id: 2,
-    title: "Bus",
-    description: "Get trained for public transport and commercial bus driving.",
-    features: ["Automatic", "Manual"],
-    vehicleImage: "/images/img_vector_white_a700_296x562.png",
-    hoverColor: "#FBBC01",
+    image: "/images/slide2.jpg",
+    title: "Master Driving",
+    highlight: "Skills",
+    description:
+      "Gain confidence on the road with expert guidance and real-world practice.",
   },
   {
     id: 3,
-    title: "Truck",
+    image: "/images/slide3.jpg",
+    title: "Drive with",
+    highlight: "Safety",
     description:
-      "Master heavy vehicle handling for logistics and long-distance routes.",
-    features: ["Automatic", "Manual"],
-    vehicleImage: "/images/img_group_179.png",
-    hoverColor: "#D52C2C",
+      "We focus on defensive driving techniques to ensure you stay safe on every journey.",
   },
 ];
 
-export default function SctrollAnimation() {
-  const swiperRef = useRef(null);
-
-  useEffect(() => {
-    if (!swiperRef.current) return;
-
-    const swiperEl = swiperRef.current.swiper;
-
-    // Allow only upward scroll (next)
-    swiperEl.el.addEventListener("wheel", (e) => {
-      if (e.deltaY > 0) {
-        swiperEl.slideNext();
-      }
-      // Block backward scroll
-      e.preventDefault();
-    });
-  }, []);
-
+const DrivingCarousel = () => {
   return (
-    <div className="w-full max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      <Swiper
-        ref={swiperRef}
-        direction="vertical"
-        slidesPerView={1}
-        spaceBetween={24}
-       
-        pagination={{ clickable: true }}
-        mousewheel={false} // disable default both-way scroll
-        className="h-auto sm:h-[650px] lg:h-[700px]"
+    <section className="w-full py-16 lg:py-24 bg-black">
+      <motion.div
+        className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
       >
-        {trainingOptions.map((opt) => (
-          <SwiperSlide key={opt.id}>
-            <div className="flex flex-col lg:flex-row items-center justify-center bg-gradient-to-r from-black to-neutral-900 rounded-3xl p-6 sm:p-10 lg:p-12 text-white shadow-2xl">
-              {/* Vehicle Image */}
-              <div className="w-full lg:w-1/2 flex justify-center mb-6 lg:mb-0">
+        <Swiper
+          modules={[Pagination, Autoplay]}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          loop={true}
+          className="h-[400px] sm:h-[500px] lg:h-[600px] relative"
+        >
+          {slides.map((slide) => (
+            <SwiperSlide key={slide.id}>
+              <div className="relative w-full h-full flex justify-center items-center">
+                {/* Image with border and rounded corners */}
                 <img
-                  src={opt.vehicleImage}
-                  alt={opt.title}
-                  className="w-[180px] sm:w-[240px] md:w-[280px] lg:w-[320px] h-auto object-contain transition-transform duration-300 hover:scale-105"
+                  src={slide.image}
+                  alt={slide.title}
+                  className="rounded-xl border-2 border-white/30 object-cover w-full h-full"
                 />
+
+                {/* Top and Bottom Glassy / Faded Overlay */}
+                <div className="absolute inset-0 rounded-xl pointer-events-none"
+                     style={{
+                       background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.5) 100%)"
+                     }}
+                ></div>
+
+                {/* Text Content */}
+                <div className="absolute bottom-0 left-0 right-0 z-10 px-6 py-8 sm:py-12 text-center">
+                  <h2 className="text-lg sm:text-2xl md:text-4xl font-bold text-white leading-snug">
+                    {slide.title}{" "}
+                    <span className="text-orange-500">{slide.highlight}</span>
+                  </h2>
+                  <p className="mt-2 sm:mt-3 text-gray-200 max-w-2xl mx-auto text-xs sm:text-sm md:text-base">
+                    {slide.description}
+                  </p>
+                </div>
               </div>
-
-              {/* Content */}
-              <div className="w-full lg:w-1/2 text-center lg:text-left">
-                <h2
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4"
-                  style={{ color: opt.hoverColor }}
-                >
-                  {opt.title}
-                </h2>
-                <p className="text-gray-300 mb-6 text-sm sm:text-base md:text-lg lg:text-xl max-w-md mx-auto lg:mx-0">
-                  {opt.description}
-                </p>
-
-                <ul className="mb-6 space-y-2 text-sm sm:text-base">
-                  {opt.features.map((f, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 justify-center lg:justify-start"
-                    >
-                      <span className="w-3 h-3 rounded-full bg-white/80" />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <button className="px-5 sm:px-6 lg:px-8 py-2 sm:py-3 rounded-xl border border-white hover:bg-white hover:text-black transition text-sm sm:text-base lg:text-lg">
-                  Choose Vehicle
-                </button>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </motion.div>
+    </section>
   );
-}
+};
+
+export default DrivingCarousel;

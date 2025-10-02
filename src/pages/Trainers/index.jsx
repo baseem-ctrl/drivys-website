@@ -98,7 +98,7 @@ const Trainer = () => {
       <main className="w-full bg-black min-h-screen text-white">
         <div className="w-full max-w-[1920px] mx-auto flex flex-col gap-[20px] lg:gap-[30px]">
           {/* Header */}
-          <div className="px-4 sm:px-6 lg:px-[80px]">
+          <div className="px-4 sm:px-6 lg:px-[80px] mt-4">
             <Header />
           </div>
 

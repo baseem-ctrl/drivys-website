@@ -62,7 +62,7 @@ const instructors = [
               </span>
             </h2>
           </div>
-          <div className="lg:w-[28%] mt-4 lg:mt-0 w-full">
+          <div className="lg:w-[28%] mt-4 lg:mt-0 w-full ">
             <p className="text-xs sm:text-sm md:text-base font-poppins font-normal leading-relaxed text-[#94969c]">
               Wide selection of expertise, language preference, and gender selection.
             </p>

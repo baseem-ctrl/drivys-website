@@ -73,11 +73,11 @@ const School = () => {
 
       <main className="w-full bg-black min-h-screen text-white">
         <div className="w-full max-w-[1920px] mx-auto flex flex-col gap-[10px] md:gap-[20px] lg:gap-[30px]">
-          <div className="w-full px-4 sm:px-6 lg:px-[80px]">
+          <div className="w-full px-4 sm:px-6 lg:px-[80px] mt-4">
             <Header />
           </div>
 
-         <section className="w-full px-4 sm:px-6 lg:px-[80px]">
+         <section className="w-full px-4 sm:px-6 lg:px-[80px] ">
               <div className="w-full max-w-[1760px] mx-auto">
                 <div
                   className="relative w-full rounded-[24px] overflow-hidden flex items-center"

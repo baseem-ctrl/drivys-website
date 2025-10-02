@@ -19,7 +19,7 @@ const Terms = () => {
           <div className="flex flex-col gap-[50px] md:gap-[75px] lg:gap-[100px] justify-start items-center">
             
             {/* Header */}
-            <div className="w-full px-4 sm:px-6 lg:px-[80px]">
+            <div className="w-full px-4 sm:px-6 lg:px-[80px] mt-4">
               <Header />
             </div>
 

@@ -11,6 +11,7 @@ import TestimonialsSection from './TestimonialsSection';
 import FAQSection from './FAQSection';
 import Footer from '../../components/common/Footer';
 import VehicleCarousel from './SliderSection';
+import DrivingCarousel from './SctrollAnimation';
 
 const Home = () => {
   const [showGreeting, setShowGreeting] = useState(true);
@@ -93,11 +94,11 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 1.5, ease: 'easeOut' }}
               >
-                Welcome to the new era of driving
+                WELCOME TO THE NEW ERA OF DRIVING
               </motion.h1>
 
               <motion.p
-                className="text-xl md:text-2xl text-white mt-6 text-center z-10 font-poppins"
+                className="text-xl md:text-xl text-white mt-6 text-center z-10 font-poppins"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 2, duration: 1 }}
@@ -154,6 +155,7 @@ const Home = () => {
             </div>
             <VehicleCarousel />
             <PricingSection />
+            <DrivingCarousel/>
             <TestimonialsSection />
             <FAQSection />
             <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-6">

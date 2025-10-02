@@ -57,7 +57,7 @@ const Blogs = () => {
         <div className="w-full max-w-[1920px] mx-auto">
           <div className="flex flex-col gap-[50px] md:gap-[75px] lg:gap-[100px] justify-start items-center">
             {/* Header */}
-            <div className="w-full px-4 sm:px-6 lg:px-[80px]">
+            <div className="w-full px-4 sm:px-6 lg:px-[80px] mt-4">
               <Header />
             </div>
                <section className="w-full px-4 sm:px-6 lg:px-[80px]">

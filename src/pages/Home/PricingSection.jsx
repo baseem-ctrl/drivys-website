@@ -57,12 +57,11 @@ const packages = [
   },
 ];
 
-
 const PricingSection = () => {
   return (
     <section className="w-full bg-black py-16">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ✅ Header */}
+        {/* Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start gap-4 lg:gap-6 mb-20">
           <div className="flex flex-col gap-3 items-start text-left">
             <Button
@@ -70,41 +69,41 @@ const PricingSection = () => {
               className="text-white text-md sm:text-2xl font-normal px-4 py-2 rounded-lg w-fit mx-0"
             />
             <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px]">
-      <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
-        Choose Your{" "}
-      </span>
+              <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
+                Choose Your{" "}
+              </span>
               <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent">
-        Training Path
-      </span>
+                Training Path
+              </span>
             </h2>
           </div>
           <div className="lg:w-[28%] text-left lg:text-left mt-4 lg:mt-0">
             <p className="text-sm md:text-xl font-poppins font-normal leading-relaxed text-[#94969c]">
-              pick the right package and help student start their driving journey with confidence
-
+              Pick the right package and help students start their driving journey
+              with confidence.
             </p>
           </div>
         </div>
 
-        {/* ✅ Mobile: full-screen horizontal scroll */}
+        {/* Mobile: horizontal scroll */}
         <div className="block md:hidden">
-          <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-none">
+          <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-none gap-6 min-h-[500px]">
             {packages.map((pkg, idx) => (
               <motion.div
                 key={pkg.id}
-                className="snap-start w-full flex-shrink-0 bg-[#1a1a1a] rounded-lg p-6 flex flex-col justify-between overflow-hidden group hover:shadow-2xl hover:scale-105 transition-transform duration-300"
+                className="snap-start min-w-[90%] bg-[#1a1a1a] rounded-lg p-6 flex flex-col justify-between"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
                 viewport={{ once: true }}
               >
-                <CardContent pkg={pkg} />
+                <CardContent pkg={pkg} isMobile />
               </motion.div>
             ))}
           </div>
         </div>
 
-
+        {/* Desktop grid */}
         <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-8">
           {packages.map((pkg, idx) => (
             <motion.div
@@ -124,20 +123,24 @@ const PricingSection = () => {
   );
 };
 
-const CardContent = ({ pkg }) => (
+const CardContent = ({ pkg, isMobile = false }) => (
   <>
-    {/* ✅ Gradient Fade Overlay */}
-    <div
-      className="absolute bottom-0 left-0 w-full h-0 opacity-0 blur-3xl pointer-events-none transition-all duration-700 group-hover:h-full group-hover:opacity-80"
-      style={{ backgroundImage: pkg.gradient }}
-    />
-    <div
-      className="absolute bottom-0 left-0 w-full h-0 opacity-0 blur-2xl pointer-events-none transition-all duration-1000 group-hover:h-full group-hover:opacity-50"
-      style={{ backgroundImage: pkg.gradient }}
-    />
+    {/* Gradient Overlay only for desktop */}
+    {!isMobile && (
+      <>
+        <div
+          className="absolute bottom-0 left-0 w-full h-0 opacity-0 blur-3xl pointer-events-none transition-all duration-700 group-hover:h-full group-hover:opacity-80"
+          style={{ backgroundImage: pkg.gradient }}
+        />
+        <div
+          className="absolute bottom-0 left-0 w-full h-0 opacity-0 blur-2xl pointer-events-none transition-all duration-1000 group-hover:h-full group-hover:opacity-50"
+          style={{ backgroundImage: pkg.gradient }}
+        />
+      </>
+    )}
 
-    {/* ✅ Content */}
-    <div className="relative z-10 flex flex-col gap-4">
+    {/* Content */}
+    <div className="relative z-10 flex flex-col gap-4 h-full">
       <div className="mb-6">
         <h3 className="text-3xl md:text-5xl font-semibold text-gray-400 mb-2">
           {pkg.name}
@@ -150,9 +153,11 @@ const CardContent = ({ pkg }) => (
 
       <Button
         text={`Choose ${pkg.name.split(" ")[0]}`}
-        className="text-white text-[16px] px-6 py-3 rounded-sm w-full shadow-lg backdrop-blur-sm bg-white/5
-           transition duration-1000
-           group-hover:bg-white group-hover:text-black"
+        className={`text-white text-[16px] px-6 py-3 rounded-sm w-full shadow-lg backdrop-blur-sm ${
+          isMobile
+            ? "bg-white/10"
+            : "bg-white/5 transition duration-1000 group-hover:bg-white group-hover:text-black"
+        }`}
         onClick={() => {}}
         style={{ fontSize: "18px" }}
       />

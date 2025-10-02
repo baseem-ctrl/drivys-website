@@ -110,7 +110,7 @@ const About = () => {
         <div className="w-full max-w-[1920px] mx-auto">
           <div className="flex flex-col gap-[50px] md:gap-[75px] lg:gap-[100px] justify-start items-center">
             {/* Header */}
-            <div className="w-full px-4 sm:px-6 lg:px-[80px]">
+            <div className="w-full px-4 sm:px-6 lg:px-[80px] mt-4">
               <Header />
             </div>
 
@@ -119,7 +119,7 @@ const About = () => {
                 <div
                   className="relative w-full rounded-[24px] overflow-hidden flex items-center"
                   style={{
-                    backgroundImage: 'url(/images/mobile-bg.png)',
+                    backgroundImage: 'url(/images/img_image_29.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
