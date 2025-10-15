@@ -79,8 +79,7 @@ const PricingSection = () => {
           </div>
           <div className="lg:w-[28%] text-left lg:text-left mt-4 lg:mt-0">
             <p className="text-sm md:text-xl font-poppins font-normal leading-relaxed text-[#94969c]">
-              Pick the right package and help students start their driving journey
-              with confidence.
+              Trusted and recognized nationwide, including by official driving schools, for quality driving education.
             </p>
           </div>
         </div>
@@ -91,7 +90,8 @@ const PricingSection = () => {
             {packages.map((pkg, idx) => (
               <motion.div
                 key={pkg.id}
-                className="snap-start min-w-[90%] bg-[#1a1a1a] rounded-lg p-6 flex flex-col justify-between"
+                className="snap-start min-w-[90%] rounded-lg p-6 flex flex-col justify-between relative"
+                style={{ backgroundImage: pkg.gradient }}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
@@ -125,15 +125,15 @@ const PricingSection = () => {
 
 const CardContent = ({ pkg, isMobile = false }) => (
   <>
-    {/* Gradient Overlay only for desktop */}
+    {/* Desktop gradient overlay */}
     {!isMobile && (
       <>
         <div
-          className="absolute bottom-0 left-0 w-full h-0 opacity-0 blur-3xl pointer-events-none transition-all duration-700 group-hover:h-full group-hover:opacity-80"
+          className="absolute bottom-0 left-0 w-full h-[30%] opacity-30 blur-3xl pointer-events-none transition-all duration-700 group-hover:h-full group-hover:opacity-80"
           style={{ backgroundImage: pkg.gradient }}
         />
         <div
-          className="absolute bottom-0 left-0 w-full h-0 opacity-0 blur-2xl pointer-events-none transition-all duration-1000 group-hover:h-full group-hover:opacity-50"
+          className="absolute bottom-0 left-0 w-full h-[30%] opacity-20 blur-2xl pointer-events-none transition-all duration-1000 group-hover:h-full group-hover:opacity-50"
           style={{ backgroundImage: pkg.gradient }}
         />
       </>
@@ -155,7 +155,7 @@ const CardContent = ({ pkg, isMobile = false }) => (
         text={`Choose ${pkg.name.split(" ")[0]}`}
         className={`text-white text-[16px] px-6 py-3 rounded-sm w-full shadow-lg backdrop-blur-sm ${
           isMobile
-            ? "bg-white/10"
+            ? "bg-white/10" // Mobile button style
             : "bg-white/5 transition duration-1000 group-hover:bg-white group-hover:text-black"
         }`}
         onClick={() => {}}

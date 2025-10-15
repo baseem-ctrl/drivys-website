@@ -8,46 +8,47 @@ const Blogs = () => {
   const articles = [
     {
       id: '1',
-      image: '/images/article1.jpg',
+      image: '/images/blogs/blog-hero.jpg',
       date: 'AUGUST 15, 2025',
-      title: 'Read Expertly Written Articles About Driving & Road Safety',
+      title: 'Top 7 Mistakes Beginners Make When Learning to Drive in the UAE',
     },
     {
       id: '2',
-      image: '/images/article2.jpg',
-      date: 'AUGUST 15, 2025',
-      title: 'Read Expertly Written Articles About Driving & Road Safety',
+      image: '/images/blogs/blog-hero2.png',
+      date: 'OCTOBER 5, 2025',
+      title: 'Top Time-Saving Tips for Learners Booking Lessons on Drivys',
     },
     {
       id: '3',
-      image: '/images/article3.jpg',
-      date: 'AUGUST 15, 2025',
-      title: 'Read Expertly Written Articles About Driving & Road Safety',
+      image: '/images/blogs/blog-hero3.jpg',
+      date: 'OCTOBER 5, 2025',
+      title: 'How to Choose the Right Driving Instructor on Drivys',
     },
     {
       id: '4',
-      image: '/images/article4.jpg',
-      date: 'AUGUST 15, 2025',
-      title: 'Read Expertly Written Articles About Driving & Road Safety',
+      image: '/images/blogs/blog-hero4.png',
+      date: 'OCTOBER 5, 2025',
+      title: 'Top Qualities of a Professional Driving Trainer in Abu Dhabi',
     },
     {
       id: '5',
-      image: '/images/article5.jpg',
+      image: '/images/blogs/article5.jpg',
       date: 'AUGUST 15, 2025',
       title: 'Read Expertly Written Articles About Driving & Road Safety',
     },
     {
       id: '6',
-      image: '/images/article3.jpg',
+      image: '/images/blogs/article3.jpg',
       date: 'AUGUST 15, 2025',
       title: 'Read Expertly Written Articles About Driving & Road Safety',
     },
   ];
 
+
   return (
     <>
       <Helmet>
-        <title>About Drivys - Expert Driving Instructors & Professional Training UAE</title>
+        <title>Blogs Drivys - Expert Driving Instructors & Professional Training UAE</title>
         <meta
           name="description"
           content="Learn about Drivys mission to bridge learners with expert driving instructors across UAE. 22+ years experience in professional driving education with modern technology and certified trainers."
@@ -63,9 +64,9 @@ const Blogs = () => {
                <section className="w-full px-4 sm:px-6 lg:px-[80px]">
               <div className="w-full max-w-[1760px] mx-auto">
                 <div
-                  className="relative w-full rounded-[24px] overflow-hidden flex items-center"
+                  className="relative w-full rounded-[39px] overflow-hidden flex items-center"
                   style={{
-                    backgroundImage: 'url(/images/img_image_29.png)',
+                    backgroundImage: 'url(/images/mobile-bg.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -98,7 +99,7 @@ const Blogs = () => {
                           backgroundClip: 'text',
                         }}
                       >
-                        About Drivys
+                        Blogs Drivys
                       </h1>
 
                       {/* Description */}

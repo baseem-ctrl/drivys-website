@@ -54,22 +54,21 @@ const FAQSection = () => {
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-6">
           <div className="flex flex-col gap-3">
             <Button
-              text="Trainers"
+              text="FAQ"
               className="text-white text-2xl font-normal px-4 py-2 rounded-lg w-fit"
             />
             <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px]">
               <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
-                Learn From{" "}
+                Your Questions{" "}
               </span>
               <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent">
-                The Best
+                Answered
               </span>
             </h2>
           </div>
           <div className="lg:w-[28%]">
             <p className="text-sm md:text-xl font-poppins font-normal leading-relaxed text-[#94969c]">
-              Wide selection of expertise, language preference, and gender
-              selection.
+              Find quick answers to the most common questions about Drivys.
             </p>
           </div>
         </div>

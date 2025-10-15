@@ -37,33 +37,32 @@ const VehicleTrainingSection = () => {
     <section className="w-full bg-black py-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-      <div className="flex flex-col lg:flex-row justify-between items-start gap-4 lg:gap-6 mb-20">
-  <div className="flex flex-col gap-3 items-start text-left">
-    <Button
-      text="Vehicle Options"
-      className="text-white text-md sm:text-2xl font-normal px-4 py-2 rounded-lg w-fit mx-0"
-    />
-    <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px]">
-      <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
-        Choose Your{" "}
-      </span>
-      <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent">
-        Training Path
-      </span>
-    </h2>
-  </div>
-  <div className="lg:w-[28%] text-center lg:text-left mt-4 lg:mt-0">
-    <p className="text-sm md:text-xl font-poppins font-normal leading-relaxed text-[#94969c]">
-      With 400+ active vehicles, we deliver reliable and timely service.
-    </p>
-  </div>
-</div>
-
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 lg:gap-6 mb-20">
+          <div className="flex flex-col gap-3 items-start text-left">
+            <Button
+              text="Vehicle Options"
+              className="text-white text-md sm:text-2xl font-normal px-4 py-2 rounded-lg w-fit mx-0"
+            />
+            <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-poppins font-bold leading-tight lg:leading-[78px]">
+              <span className="bg-[linear-gradient(270deg,#cccccc_0%,#ffffff_50%,#cccccc_100%)] bg-clip-text text-transparent">
+                Choose Your{" "}
+              </span>
+              <span className="bg-[linear-gradient(90deg,#f68b2c_0%,#c05a00_100%)] bg-clip-text text-transparent">
+                Training Path
+              </span>
+            </h2>
+          </div>
+          <div className="lg:w-[28%] text-center lg:text-left mt-4 lg:mt-0">
+            <p className="text-sm md:text-xl font-poppins font-normal leading-relaxed text-[#94969c]">
+              With 400+ active vehicles, we deliver reliable and timely service.
+            </p>
+          </div>
+        </div>
 
         {/* Cards */}
         <div className="relative">
           {trainingOptions.map((option, index) => (
-            <Card key={option.id} option={option} index={index} total={trainingOptions.length} />
+            <Card key={option.id} option={option} index={index} />
           ))}
         </div>
       </div>
@@ -85,9 +84,21 @@ const Card = ({ option, index }) => {
       style={{ y, zIndex: index + 1 }}
       whileHover={{ backgroundColor: option.hoverColor }}
       transition={{ duration: 0.5 }}
-      className="group sticky top-24 w-full bg-[#141414] rounded-2xl p-8 md:p-12 shadow-2xl mb-20"
+      className="group relative sticky top-24 w-full bg-[#141414] rounded-2xl p-8 md:p-12 shadow-2xl mb-20 overflow-hidden"
     >
-      <div className="flex flex-col md:flex-row gap-10 items-start md:items-center">
+      {/* ✨ Left-side Color Fading Overlay */}
+      <motion.div
+        className="absolute left-0 top-0 w-1/3 h-full pointer-events-none transition-all duration-500"
+        initial={{
+          background: 'linear-gradient(to right, rgba(255,255,255,0.08), transparent)',
+        }}
+        whileHover={{
+          background: `linear-gradient(to right, ${option.hoverColor}40, transparent)`, // 40 = 25% opacity
+        }}
+        transition={{ duration: 0.6, ease: 'easeInOut' }}
+      ></motion.div>
+
+      <div className="flex flex-col md:flex-row gap-10 items-start md:items-center relative z-10">
         {/* Left Side */}
         <div className="w-full md:w-1/2 flex flex-col gap-6">
           {/* Number Button */}
@@ -139,3 +150,4 @@ const Card = ({ option, index }) => {
 };
 
 export default VehicleTrainingSection;
+

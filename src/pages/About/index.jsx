@@ -3,33 +3,133 @@ import { Helmet } from 'react-helmet';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
 import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
+import AnimatedText from "./AnimatedText";
 
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Fade-up animation variant
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+gsap.registerPlugin(ScrollTrigger)
+
+import { Typewriter } from "react-simple-typewriter";
+
+// Smooth fade-up animation variant with slower timing
+const fadeUpSmooth = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.2,
+      ease: [0.25, 0.1, 0.25, 1] // Custom smooth easing
+    }
+  },
 };
 
-const fadeIn = {
+// Slower fade-in for hero sections
+const fadeInSlow = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1 } },
-};
-const imageVariant = {
-  hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-};
-
-const contentVariant = {
-  hidden: { opacity: 0, x: 50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut', delay: 0.2 } },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 1.5,
+      ease: "easeOut"
+    }
+  },
 };
 
+// Staggered children animation
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+};
 
+// Individual item animation for staggered effect
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  }
+};
 
+// Image fade from left
+const imageVariantLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 1.2,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  },
+};
+
+// Content fade from right
+const contentVariantRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 1.2,
+      ease: [0.25, 0.1, 0.25, 1],
+      delay: 0.2
+    }
+  },
+};
 
 const About = () => {
+  // Declare refs at component level
+  const sectionRef = useRef(null);
+  const leftSideRef = useRef(null);
+  const rightSideRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate left side from left with smoother easing
+      gsap.from(leftSideRef.current, {
+        x: -100,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      // Animate right side from right with smoother easing
+      gsap.from(rightSideRef.current, {
+        x: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+
   const servicesData = [
     {
       id: '01',
@@ -89,6 +189,19 @@ const About = () => {
     },
   ];
 
+  const text = `We do not just provide a service… we deliver a mission.
+
+For more than twenty-five years, we have believed that leadership is not merely about steering a wheel or shifting gears—it is a journey built on honesty, integrity, discipline, and responsibility, both toward yourself and those who share the road with you. At Drivys, we are not here just to teach driving; we are here to instill confidence and nurture a generation of drivers who lead with ethics before leading with their vehicles.
+
+We have crafted our experience with deep expertise and vision, bringing together the most committed instructors and the latest educational technologies that ensure learners not only acquire skills but live a complete journey—building confidence and a sense of responsibility in every step they take on the road.
+
+We believe that teaching driving is shaping the future, and a safer future begins here, at Drivys, where we passionately work to create a conscious and safe community, contributing to better roads for everyone.
+
+With Drivys, you do not just learn to drive—you discover your path toward confidence, safety, and excellence.
+
+Drivys… Your Road to the Road`;
+
+
   return (
     <>
       <Helmet>
@@ -108,40 +221,60 @@ const About = () => {
       </Helmet>
       <main className="w-full bg-black min-h-screen">
         <div className="w-full max-w-[1920px] mx-auto">
-          <div className="flex flex-col gap-[50px] md:gap-[75px] lg:gap-[100px] justify-start items-center">
+          <div className="flex flex-col">
             {/* Header */}
-            <div className="w-full px-4 sm:px-6 lg:px-[80px] mt-4">
+            <motion.div
+              className="w-full px-4 sm:px-6 lg:px-[80px] mt-4 mb-6"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
               <Header />
-            </div>
+            </motion.div>
 
-            <section className="w-full px-4 sm:px-6 lg:px-[80px]">
+            {/* Hero Section */}
+            <motion.section
+              className="w-full px-4 sm:px-6 lg:px-[80px]"
+              initial="hidden"
+              animate="visible"
+              variants={fadeInSlow}
+            >
               <div className="w-full max-w-[1760px] mx-auto">
-                <div
-                  className="relative w-full rounded-[24px] overflow-hidden flex items-center"
+                <motion.div
+                  className="relative w-full rounded-[39px] overflow-hidden flex items-center"
                   style={{
-                    backgroundImage: 'url(/images/img_image_29.png)',
+                    backgroundImage: 'url(/images/mobile-bg.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    minHeight: '360px', // ensures enough height for centering
+                    minHeight: '360px',
                   }}
+                  variants={fadeUpSmooth}
                 >
                   <div className="flex flex-col lg:flex-row justify-between items-center w-full px-4 lg:px-[48px]">
                     {/* Text Area */}
-                    <div className="flex flex-col justify-center items-start w-full lg:w-[58%]">
+                    <motion.div
+                      className="flex flex-col justify-center items-start w-full lg:w-[58%]"
+                      variants={containerVariants}
+                      initial="hidden"
+                      animate="visible"
+                    >
                       {/* Breadcrumb */}
-                      <div className="bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_50%,#ffffff19_100%)] border border-solid border-transparent rounded-[10px] px-[8px] md:px-[12px] lg:px-[16px] py-[4px] md:py-[6px] lg:py-[8px]">
+                      <motion.div
+                        className="bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_50%,#ffffff19_100%)] border border-solid border-transparent rounded-[10px] px-[8px] md:px-[12px] lg:px-[16px] py-[4px] md:py-[6px] lg:py-[8px]"
+                        variants={itemVariants}
+                      >
                         <p
                           className="text-base md:text-lg lg:text-xl font-normal leading-[22px] md:leading-[26px] lg:leading-[30px] text-left text-white"
                           style={{ fontFamily: 'Poppins' }}
                         >
                           <span className="text-white">Home / </span>
-                          <span className="text-white font-semibold">About Us</span>
+                          <span className="text-white font-semibold">About</span>
                         </p>
-                      </div>
+                      </motion.div>
 
                       {/* Main Heading */}
-                      <h1
+                      <motion.h1
                         className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-[38px] sm:leading-[48px] md:leading-[68px] text-left mt-2"
                         style={{
                           fontFamily: 'Poppins',
@@ -151,46 +284,48 @@ const About = () => {
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text',
                         }}
+                        variants={itemVariants}
                       >
                         About Drivys
-                      </h1>
+                      </motion.h1>
 
                       {/* Description */}
-                      <p
+                      <motion.p
                         className="text-base md:text-xl lg:text-2xl font-normal leading-[24px] md:leading-[30px] lg:leading-[34px] text-left text-[#94969c] w-full lg:w-[64%] mt-2"
                         style={{ fontFamily: 'Poppins' }}
+                        variants={itemVariants}
                       >
                         Drivys makes learning to drive simple, safe, and flexible with trusted
                         instructors and modern tools.
-                      </p>
-                    </div>
+                      </motion.p>
+                    </motion.div>
 
                     {/* Hero Image */}
                     <div className="w-full lg:w-[38%] flex justify-center items-center"></div>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </section>
+            </motion.section>
 
             {/* Main Content Section */}
             <motion.section
-              className="w-full px-4 sm:px-6 lg:px-20"
+              className="w-full py-[50px] md:py-[70px] lg:py-[90px] px-4 sm:px-6 lg:px-[80px]"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeUpSmooth}
             >
               <div className="w-full max-w-[1760px] mx-auto">
                 <div className="flex flex-col items-left w-full">
                   {/* Section Title */}
                   <motion.h2
                     className="p-10 text-left text-5xl sm:text-4xl md:text-6xl font-extrabold leading-tight w-full lg:w-2/3 font-poppins bg-gradient-to-r from-[#ccc] via-white to-[#ccc] bg-clip-text text-transparent"
-                    variants={fadeUp}
+                    variants={fadeUpSmooth}
                   >
                     Bridging Learners with Expert Driving{' '}
                     <span className="bg-gradient-to-r from-[#f68b2c] to-[#c05a00] bg-clip-text text-transparent">
-                UAE
-              </span>
+                      UAE
+                    </span>
                   </motion.h2>
 
                   {/* Content Row */}
@@ -198,10 +333,13 @@ const About = () => {
                     {/* Left Image */}
                     <motion.div
                       className="w-full lg:w-auto flex justify-center lg:justify-start"
-                      variants={fadeUp}
+                      variants={imageVariantLeft}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.3 }}
                     >
                       <img
-                        src="/images/img_freepik_the_st.png"
+                        src="/images/img_freepik_the_st.jpg"
                         alt="Driving instructor teaching a student"
                         className="w-full max-w-[320px] md:max-w-[480px] lg:max-w-[620px] h-auto rounded-xl md:rounded-2xl lg:rounded-3xl"
                       />
@@ -210,51 +348,71 @@ const About = () => {
                     {/* Right Content */}
                     <motion.div
                       className="flex flex-col items-start w-full lg:w-[58%] lg:self-center"
-                      variants={fadeUp}
+                      variants={contentVariantRight}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.3 }}
                     >
-                      <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-white w-full lg:w-11/12 font-poppins">
+                      <p className="text-lg sm:text-xl lg:text-2xl font-normal leading-relaxed text-white w-full lg:w-11/12 font-poppins">
                         At Driyvs, we believe that learning to drive should be simple, safe, and
-                        confidence-building. With over 22 years of expertise in training professional
-                        driving instructors, our platform was created to bridge the gap between learners
-                        and top-tier trainers, delivering a modern, smart driving education experience
-                        powered by technology and innovation. We are a fully integrated digital platform
-                        that connects students with certified driving instructors across the UAE.
+                        confidence-building. With over 22 years of expertise in training
+                        professional driving instructors, our platform was created to bridge the gap
+                        between learners and top-tier trainers, delivering a modern, smart driving
+                        education experience powered by technology and innovation. We are a fully
+                        integrated digital platform that connects students with certified driving
+                        instructors across the UAE.
                       </p>
+
 
                       {/* Our Story Section */}
                       <motion.h3
                         className="text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight mt-12 lg:mt-20 font-poppins bg-gradient-to-r from-[#ccc] via-white to-[#ccc] bg-clip-text text-transparent"
-                        variants={fadeUp}
+                        variants={fadeUpSmooth}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
                       >
                         Our{' '}
                         <span className="bg-gradient-to-r from-[#f68b2c] to-[#c05a00] bg-clip-text text-transparent">
-                    Story
-                  </span>
+                          Story
+                        </span>
                       </motion.h3>
 
-                      <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-[#94969c] w-full mt-3 lg:mt-5 font-poppins">
+                      <motion.p
+                        className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-[#94969c] w-full mt-3 lg:mt-5 font-poppins"
+                        variants={fadeUpSmooth}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                      >
                         Driyvs was created to transform driving education with certified trainers,
-                        modern tools, and flexible learning — making every learner's journey safe and
-                        simple.
-                      </p>
+                        modern tools, and flexible learning — making every learner's journey safe
+                        and simple.
+                      </motion.p>
 
-                      <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-white w-full lg:w-11/12 mt-6 lg:mt-10 font-poppins">
+                      <motion.p
+                        className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-white w-full lg:w-11/12 mt-6 lg:mt-10 font-poppins"
+                        variants={fadeUpSmooth}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                      >
                         With over 22 years of hands-on experience training driving instructors and
-                        developing innovative teaching methods, we recognized a gap: learners needed a
-                        modern, accessible, and professional platform to connect with trusted instructors
-                        and achieve their driving goals with confidence.
+                        developing innovative teaching methods, we recognized a gap: learners needed
+                        a modern, accessible, and professional platform to connect with trusted
+                        instructors and achieve their driving goals with confidence.
                         <br />
                         <br />
-                        Thus, Driyvs was created — a powerful blend of expertise, technology, and a deep
-                        commitment to student success. From humble beginnings, we have grown into a
-                        dynamic network connecting thousands of learners with certified, top-rated
-                        instructors across the country.
+                        Thus, Driyvs was created — a powerful blend of expertise, technology, and a
+                        deep commitment to student success. From humble beginnings, we have grown
+                        into a dynamic network connecting thousands of learners with certified,
+                        top-rated instructors across the country.
                         <br />
                         <br />
-                        Every mile driven, every skill mastered, and every license earned is a testament
-                        to our unwavering mission: to build safer roads and more confident drivers for
-                        tomorrow. We drive dreams forward.
-                      </p>
+                        Every mile driven, every skill mastered, and every license earned is a
+                        testament to our unwavering mission: to build safer roads and more confident
+                        drivers for tomorrow. We drive dreams forward.
+                      </motion.p>
                     </motion.div>
                   </div>
                 </div>
@@ -263,24 +421,25 @@ const About = () => {
 
             {/* Services Section */}
             <motion.section
-              className="w-full px-4 sm:px-6 lg:px-[80px] bg-black"
+              className="w-full py-[35px] md:py-[50px] lg:py-[60px] px-4 sm:px-6 lg:px-[80px] bg-black"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
+              viewport={{ once: true, amount: 0.2 }}
+              variants={containerVariants}
             >
               <div className="w-full max-w-[1760px] mx-auto">
                 <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-[60px]">
                   {/* Left Content */}
                   <motion.div
                     className="flex flex-col justify-start items-start w-full lg:w-[40%] mt-[40px] lg:mt-[120px]"
-                    variants={fadeUp}
+                    variants={fadeUpSmooth}
                   >
                     <h2
                       className="text-[38px] sm:text-[44px] md:text-[50px] font-extrabold leading-[58px] md:leading-[64px] text-left"
                       style={{
                         fontFamily: 'Poppins',
-                        background: 'linear-gradient(270deg, #cccccc 0%, #ffffff 50%, #cccccc 100%)',
+                        background:
+                          'linear-gradient(270deg, #cccccc 0%, #ffffff 50%, #cccccc 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                       }}
@@ -293,77 +452,116 @@ const About = () => {
                           WebkitTextFillColor: 'transparent',
                         }}
                       >
-                  Services
-                </span>
+                        Services
+                      </span>
                     </h2>
 
                     <p
                       className="text-[16px] md:text-[18px] lg:text-[20px] font-normal leading-[28px] md:leading-[30px] lg:leading-[32px] text-left text-[#b3b3b3] w-full lg:w-[92%] mt-[20px]"
                       style={{ fontFamily: 'Poppins' }}
                     >
-                      At Driyvs, we believe that learning to drive is not just a skill— it’s a
-                      transformational journey towards confidence and responsibility. That’s why our
+                      At Driyvs, we believe that learning to drive is not just a skill— it's a
+                      transformational journey towards confidence and responsibility. That's why our
                       services are carefully crafted to serve students, trainer, and driving schools
                       with a strong commitment to quality and professionalism.
                     </p>
                   </motion.div>
 
                   {/* Right Services Grid */}
-                  <motion.div className="flex flex-col md:flex-row justify-start items-start w-full lg:w-[60%] gap-[20px]" variants={fadeUp}>
+                  <motion.div
+                    className="flex flex-col md:flex-row justify-start items-start w-full lg:w-[60%] gap-[20px]"
+                    variants={containerVariants}
+                  >
                     {/* Left Column */}
-                    <motion.div className="flex flex-col gap-[20px] w-full md:w-1/2 mt-0 lg:mt-[60px]" variants={fadeUp}>
+                    <motion.div
+                      className="flex flex-col gap-[20px] w-full md:w-1/2 mt-0 lg:mt-[60px]"
+                      variants={containerVariants}
+                    >
                       {/* Service 01 */}
-                      <motion.div className="bg-[#141414] rounded-[16px] p-[28px] w-full" variants={fadeUp}>
+                      <motion.div
+                        className="bg-[#141414] rounded-[16px] p-[28px] w-full"
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <div className="flex flex-col gap-[16px] items-start">
                           <div className="border border-[#fff] rounded-[6px] px-3 py-1">
-                            <span className="text-white text-[18px] font-semibold font-poppins">01</span>
+                            <span className="text-white text-[18px] font-semibold font-poppins">
+                              01
+                            </span>
                           </div>
                           <p className="text-white text-[16px] leading-[26px] font-normal font-poppins">
                             Get personalized lessons tailored to your needs, covering city driving,
-                            highway skills, parking techniques, and more — with top certified instructors
-                            guiding you every step.
+                            highway skills, parking techniques, and more — with top certified
+                            instructors guiding you every step.
                           </p>
                         </div>
                       </motion.div>
 
                       {/* Service 03 */}
-                      <motion.div className="bg-[#141414] rounded-[16px] p-[28px] w-full" variants={fadeUp}>
+                      <motion.div
+                        className="bg-[#141414] rounded-[16px] p-[28px] w-full"
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <div className="flex flex-col gap-[16px] items-start">
                           <div className="border border-[#fff] rounded-[6px] px-3 py-1">
-                            <span className="text-white text-[18px] font-semibold font-poppins">03</span>
+                            <span className="text-white text-[18px] font-semibold font-poppins">
+                              03
+                            </span>
                           </div>
                           <p className="text-white text-[16px] leading-[26px] font-normal font-poppins">
-                            Master the skills to drive buses and trucks professionally through specialized,
-                            safety-focused programs delivered by experienced trainers.
+                            Master the skills to drive buses and trucks professionally through
+                            specialized, safety-focused programs delivered by experienced trainers.
                           </p>
                         </div>
                       </motion.div>
                     </motion.div>
 
                     {/* Right Column */}
-                    <motion.div className="flex flex-col gap-[20px] w-full md:w-1/2" variants={fadeUp}>
+                    <motion.div
+                      className="flex flex-col gap-[20px] w-full md:w-1/2"
+                      variants={containerVariants}
+                    >
                       {/* Service 02 */}
-                      <motion.div className="bg-[#141414] rounded-[16px] p-[28px] w-full" variants={fadeUp}>
+                      <motion.div
+                        className="bg-[#141414] rounded-[16px] p-[28px] w-full"
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <div className="flex flex-col gap-[16px] items-start">
                           <div className="border border-[#fff] rounded-[6px] px-3 py-1">
-                            <span className="text-white text-[18px] font-semibold font-poppins">02</span>
+                            <span className="text-white text-[18px] font-semibold font-poppins">
+                              02
+                            </span>
                           </div>
                           <p className="text-white text-[16px] leading-[26px] font-normal font-poppins">
-                            Quickly find your perfect instructor using our advanced, location-based filtering
-                            system—matching you by language, vehicle type, gender, and more.
+                            Quickly find your perfect instructor using our advanced, location-based
+                            filtering system—matching you by language, vehicle type, gender, and
+                            more.
                           </p>
                         </div>
                       </motion.div>
 
                       {/* Service 05 */}
-                      <motion.div className="bg-[#141414] rounded-[16px] p-[28px] w-full" variants={fadeUp}>
+                      <motion.div
+                        className="bg-[#141414] rounded-[16px] p-[28px] w-full"
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <div className="flex flex-col gap-[16px] items-start">
                           <div className="border border-[#fff] rounded-[6px] px-3 py-1">
-                            <span className="text-white text-[18px] font-semibold font-poppins">05</span>
+                            <span className="text-white text-[18px] font-semibold font-poppins">
+                              05
+                            </span>
                           </div>
                           <p className="text-white text-[16px] leading-[26px] font-normal font-poppins">
-                            Streamline your school's operations with our smart dashboard for scheduling,
-                            student tracking, digital certifications, and detailed performance analytics.
+                            Streamline your school's operations with our smart dashboard for
+                            scheduling, student tracking, digital certifications, and detailed
+                            performance analytics.
                           </p>
                         </div>
                       </motion.div>
@@ -373,44 +571,63 @@ const About = () => {
               </div>
             </motion.section>
 
+            {/* Vision Section */}
             <motion.section
-              className="w-full px-4 sm:px-6 lg:px-[132px] py-[32px] md:py-[48px] lg:py-[64px] bg-black"
+              className="w-full py-[32px] md:py-[48px] lg:py-[64px] px-4 sm:px-6 lg:px-[80px] bg-black"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeUpSmooth}
             >
               <div className="w-full max-w-[1760px] mx-auto">
                 <div className="flex flex-col justify-start items-center w-full gap-[40px] md:gap-[60px] lg:gap-[80px]">
                   <div className="flex flex-col gap-[20px] md:gap-[30px] lg:gap-[40px] justify-start items-center w-full">
                     {/* Section Title */}
-                    <h2
+                    <motion.h2
                       className="text-[26px] sm:text-[39px] md:text-[52px] font-black leading-[34px] sm:leading-[50px] md:leading-[67px] text-center"
                       style={{ fontFamily: 'Poppins' }}
+                      variants={fadeUpSmooth}
                     >
                       <span className="text-white">Our </span>
                       <span className="text-[#f68c2d]">Vision</span>
-                    </h2>
+                    </motion.h2>
 
                     {/* Content Row */}
                     <div className="flex flex-col lg:flex-row justify-between items-center w-full gap-8 lg:gap-0">
                       {/* Left Icon */}
-                      <div className="bg-[#141414] rounded-[12px] md:rounded-[18px] lg:rounded-[24px] p-[50px] md:p-[75px] lg:p-[100px_56px] w-full lg:w-[36%] flex justify-center items-center">
+                      <motion.div
+                        className="bg-[#141414] rounded-[12px] md:rounded-[18px] lg:rounded-[24px] p-[50px] md:p-[75px] lg:p-[100px_56px] w-full lg:w-[36%] flex justify-center items-center"
+                        variants={imageVariantLeft}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                      >
                         <img
-                          src="/images/img_fi_6179903.png"
+                          src="/images/drivys_vision.gif"
                           alt="Vision icon"
                           className="w-[150px] h-[150px] md:w-[225px] md:h-[225px] lg:w-[300px] lg:h-[300px]"
                         />
-                      </div>
+                      </motion.div>
 
                       {/* Right Content */}
-                      <div className="flex flex-col gap-[24px] w-full lg:w-[48%]">
+                      <motion.div
+                        className="flex flex-col gap-[24px] w-full lg:w-[48%]"
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                      >
                         {visionData?.map((item, index) => (
-                          <div key={index} className="relative w-full">
+                          <motion.div
+                            key={index}
+                            className="relative w-full"
+                            variants={itemVariants}
+                            custom={index}
+                          >
                             <div className="relative rounded-[12px] p-[22px] md:p-[30px] lg:p-[36px] w-full border border-white bg-black bg-clip-padding">
-                        <span className="absolute -top-3 left-6 bg-black px-2 text-[18px] md:text-[22px] lg:text-[24px] font-bold text-white">
-                          {item?.id}
-                        </span>
+                              <span className="absolute -top-3 left-6 bg-black px-2 text-[18px] md:text-[22px] lg:text-[24px] font-bold text-white">
+                                {item?.id}
+                              </span>
                               <p
                                 className="relative z-10 text-sm md:text-lg lg:text-[20px] font-normal leading-[24px] md:leading-[30px] lg:leading-[34px] text-left text-white"
                                 style={{ fontFamily: 'Poppins' }}
@@ -418,9 +635,9 @@ const About = () => {
                                 {item?.title}
                               </p>
                             </div>
-                          </div>
+                          </motion.div>
                         ))}
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
@@ -429,34 +646,46 @@ const About = () => {
 
             {/* Mission Section */}
             <motion.section
-              className="w-full px-4 sm:px-6 lg:px-[132px] py-[32px] md:py-[48px] lg:py-[64px] bg-black"
+              className="w-full py-[32px] md:py-[48px] lg:py-[64px] px-4 sm:px-6 lg:px-[80px] bg-black"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeUpSmooth}
             >
               <div className="w-full max-w-[1760px] mx-auto">
                 <div className="flex flex-col justify-start items-center w-full gap-[40px] md:gap-[60px] lg:gap-[80px]">
                   <div className="flex flex-col gap-[20px] md:gap-[30px] lg:gap-[40px] justify-start items-center w-full">
                     {/* Section Title */}
-                    <h2
+                    <motion.h2
                       className="text-[26px] sm:text-[39px] md:text-[52px] font-black leading-[34px] sm:leading-[50px] md:leading-[67px] text-center"
                       style={{ fontFamily: 'Poppins' }}
+                      variants={fadeUpSmooth}
                     >
                       <span className="text-white">Our </span>
                       <span className="text-[#f68c2d]">Mission</span>
-                    </h2>
+                    </motion.h2>
 
                     {/* Content Row */}
                     <div className="flex flex-col lg:flex-row justify-between items-center w-full gap-8 lg:gap-0">
                       {/* Left Content */}
-                      <div className="flex flex-col gap-[24px] w-full lg:w-[48%]">
+                      <motion.div
+                        className="flex flex-col gap-[24px] w-full lg:w-[48%]"
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                      >
                         {missionData?.map((item, index) => (
-                          <div key={index} className="relative w-full">
+                          <motion.div
+                            key={index}
+                            className="relative w-full"
+                            variants={itemVariants}
+                            custom={index}
+                          >
                             <div className="relative rounded-[12px] p-[22px] md:p-[30px] lg:p-[36px] w-full border border-white bg-black bg-clip-padding">
-                        <span className="absolute -top-3 left-6 bg-black px-2 text-[18px] md:text-[22px] lg:text-[24px] font-bold text-white">
-                          {item?.id}
-                        </span>
+                              <span className="absolute -top-3 left-6 bg-black px-2 text-[18px] md:text-[22px] lg:text-[24px] font-bold text-white">
+                                {item?.id}
+                              </span>
                               <p
                                 className="relative z-10 text-sm md:text-lg lg:text-[20px] font-normal leading-[24px] md:leading-[30px] lg:leading-[34px] text-left text-white"
                                 style={{ fontFamily: 'Poppins' }}
@@ -464,85 +693,121 @@ const About = () => {
                                 {item?.title}
                               </p>
                             </div>
-                          </div>
+                          </motion.div>
                         ))}
-                      </div>
+                      </motion.div>
 
                       {/* Right Icon */}
-                      <div className="bg-[#141414] rounded-[12px] md:rounded-[18px] lg:rounded-[24px] p-[50px] md:p-[75px] lg:p-[100px_56px] w-full lg:w-[36%] flex justify-center items-center">
+                      <motion.div
+                        className="bg-[#141414] rounded-[12px] md:rounded-[18px] lg:rounded-[24px] p-[50px] md:p-[75px] lg:p-[100px_56px] w-full lg:w-[36%] flex justify-center items-center"
+                        variants={contentVariantRight}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                      >
                         <img
-                          src="/images/img_fi_1628441.png"
+                          src="/images/drivys_mission.gif"
                           alt="Mission icon"
                           className="w-[150px] h-[150px] md:w-[225px] md:h-[225px] lg:w-[300px] lg:h-[300px]"
                         />
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
               </div>
             </motion.section>
-            <section className="w-full flex flex-col lg:flex-row items-center justify-center lg:justify-start py-6 lg:py-12 px-4 sm:px-6 lg:px-32 gap-6 lg:gap-12 relative">
-              {/* Left Side - Image with Orange Border */}
-              <div className="relative w-full lg:w-1/2 flex justify-center lg:justify-start">
-                <div className="relative w-full max-w-[520px]">
-                  {/* Orange border only on left & bottom */}
-                  <div className="absolute -left-[2px] -bottom-[2px] w-full h-full rounded-[20px] border-l-[10px] border-b-[10px] border-[#F97316]"></div>
 
-                  {/* Image */}
-                  <img
-                    src="/images/img_rectangle_34624998.png"
-                    alt="Professional Trainer"
-                    className="relative w-full h-auto object-cover rounded-[20px] z-10"
-                  />
-                </div>
+            {/* Professional Trainer Section */}
+            <section
+              ref={sectionRef}
+              className="w-full py-[32px] md:py-[48px] lg:py-[64px] px-4 sm:px-6 lg:px-[80px]"
+            >
+              <div className="w-full max-w-[1760px] mx-auto">
+                <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between relative">
+                  {/* Left Side - Image with Orange Border */}
+                  <div
+                    ref={leftSideRef}
+                    className="relative w-full lg:w-1/2 flex justify-center lg:justify-end lg:-mr-[10%] mb-8 lg:mb-0"
+                  >
+                    <div className="relative w-full max-w-[680px]">
+                      {/* Orange border only on left & bottom */}
+                      <div className="absolute -left-[2px] -bottom-[2px] w-full h-full rounded-[20px] border-l-[10px] border-b-[10px] border-[#F97316]"></div>
 
-                {/* Overlapping Content Box */}
-                <div className="absolute left-1/2 lg:left-[100%] top-[85%] lg:top-1/2 -translate-x-1/2 lg:-translate-x-1/4 -translate-y-1/2 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[130%] max-w-[800px] z-20">
-                  <div className="bg-[#1A1A1A] rounded-[20px] p-6 sm:p-8 md:p-10 lg:p-12 shadow-2xl border border-gray-800">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4 leading-tight">
-                      Professional <span className="text-[#F97316]">Trainer</span>
-                    </h2>
-                    <p className="text-base sm:text-md md:text-lg lg:text-[px] text-white leading-relaxed">
-                      At Driyvs, we take pride in our team of certified, highly experienced driving
-                      trainers who are dedicated to providing the highest quality of education. Each
-                      instructor is not only skilled in their craft but also passionate about
-                      helping students build confidence. With personalized trainers, they focus on
-                      your individual needs, ensuring that you master every aspect of driving safely
-                      and efficiently.
-                    </p>
+                      {/* Image */}
+                      <img
+                        src="/images/img_rectangle_34624998.png"
+                        alt="Professional Trainer"
+                        className="relative w-full h-auto object-cover rounded-[20px] z-10"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Right Side - Content Box */}
+                  <div
+                    ref={rightSideRef}
+                    className="w-full lg:w-1/2 flex justify-center lg:justify-start"
+                  >
+                    <div className="bg-[#1A1A1A] rounded-[20px] p-6 sm:p-8 md:p-10 lg:p-12 shadow-2xl border border-gray-800 w-full max-w-[800px]">
+                      {/* Heading popping out */}
+                      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight relative -top-4 lg:-top-6 z-10">
+                        Professional <span className="text-[#F97316]">Trainer</span>
+                      </h2>
+                      <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-white leading-loose mt-6 font-poppins">
+                        At Driyvs, we believe that learning to drive should be simple, safe, and
+                        confidence-building. With over 22 years of expertise in training
+                        professional driving instructors, our platform was created to bridge the gap
+                        between learners and top-tier trainers, delivering a modern, smart driving
+                        education experience powered by technology and innovation. We are a fully
+                        integrated digital platform that connects students with certified driving
+                        instructors across the UAE.
+                      </p>
+
+                    </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            <section className="relative w-full px-4 sm:px-6 lg:px-[136px] py-[100px] md:py-[150px] lg:py-[200px] overflow-hidden">
+            {/* Leadership Message Section */}
+            <motion.section
+              className="relative w-full py-[60px] md:py-[100px] lg:py-[140px] px-4 sm:px-6 lg:px-[80px] overflow-hidden"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeUpSmooth}
+            >
               {/* Full-Width Background Scrolling Text */}
-              <div className="absolute top-[20%] left-0 w-full overflow-hidden z-0">
+              <motion.div
+                className="absolute top-[15%] left-0 w-full overflow-hidden z-0"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 0.2 }}
+                transition={{ duration: 1.5 }}
+              >
                 <div
-                  className="whitespace-nowrap animate-marquee font-black text-[60px] sm:text-[60px] md:text-[80px] lg:text-[140px] opacity-20 uppercase tracking-[0.1em] text-transparent"
+                  className="whitespace-nowrap animate-marquee font-black text-[40px] sm:text-[50px] md:text-[70px] lg:text-[120px] opacity-20 uppercase tracking-[0.08em] text-transparent"
                   style={{
                     fontFamily: 'Poppins',
-                    WebkitTextStrokeWidth: '3px',
+                    WebkitTextStrokeWidth: '2px',
                     WebkitTextStrokeColor: 'white',
                   }}
                 >
                   Your Road to the Road • Your Road to the Road • Your Road to the Road • Your Road
                   to the Road •
                 </div>
-              </div>
+              </motion.div>
 
               <div className="w-full max-w-[1760px] mx-auto relative z-10">
                 <div className="flex justify-center items-center w-full relative">
-                  {/* Main Box - stays centered */}
-                  <div
+                  {/* Main Box */}
+                  <motion.div
                     className="bg-[#141414] rounded-[12px] md:rounded-[18px] lg:rounded-[24px] w-full lg:w-[92%] relative z-10 flex justify-center"
-                    data-aos="zoom-in"
+                    variants={fadeUpSmooth}
                   >
-                    {/* Content - centered box, left aligned text */}
-                    <div className="w-full max-w-[850px] flex flex-col gap-[8px] md:gap-[10px] lg:gap-[12px] p-[13px] md:p-[20px] lg:p-[26px] relative z-10 mt-10">
+                    {/* Content */}
+                    <div className="w-full max-w-[850px] flex flex-col gap-[6px] md:gap-[8px] lg:gap-[10px] p-[12px] md:p-[18px] lg:p-[22px] relative z-10 mt-8">
                       {/* Section Title */}
-                      <h2
-                        className="text-[26px] sm:text-[39px] md:text-[52px] font-black leading-[39px] sm:leading-[59px] md:leading-[72px] text-left"
+                      <motion.h2
+                        className="text-[22px] sm:text-[32px] md:text-[44px] lg:text-[60px] font-black leading-[32px] sm:leading-[44px] md:leading-[60px] text-left"
                         style={{
                           fontFamily: 'Poppins',
                           background:
@@ -551,7 +816,7 @@ const About = () => {
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text',
                         }}
-                        data-aos="fade-up"
+                        variants={fadeUpSmooth}
                       >
                         <span>Our Leadership </span>
                         <span
@@ -561,25 +826,19 @@ const About = () => {
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text',
                           }}
-                          data-aos="zoom-in"
-                          data-aos-delay="100"
                         >
                           Message
                         </span>
-                      </h2>
+                      </motion.h2>
 
                       {/* Paragraph */}
-                      <div
-                        className="w-full py-6 md:py-8 lg:py-10"
-                        data-aos="fade-up"
-                        data-aos-delay="200"
-                        style={{ fontSize:'20px' }}
+                      <motion.div
+                        className="w-full py-4 md:py-6 lg:py-8"
+                        variants={fadeUpSmooth}
                       >
                         <p
-                          className="text-xs sm:text-sm md:text-base lg:text-lg font-normal leading-relaxed md:leading-[26px] lg:leading-[30px] text-left text-white"
-                          style={{ fontFamily: 'Poppins',
-                            fontSize:'20px'
-                           }}
+                          className="text-[16px] sm:text-[17px] md:text-[18px] lg:text-[20px] font-normal leading-[22px] sm:leading-[26px] md:leading-[28px] lg:leading-[32px] text-left text-white fade-in-text"
+                          style={{ fontFamily: 'Poppins' }}
                         >
                           We do not just provide a service… we deliver a mission.
                           <br />
@@ -610,9 +869,9 @@ const About = () => {
                           <br />
                           Drivys… Your Road to the Road
                         </p>
-                      </div>
+                      </motion.div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
 
@@ -632,10 +891,18 @@ const About = () => {
                   animation: marquee 25s linear infinite;
                 }
               `}</style>
-            </section>
+            </motion.section>
 
             {/* Footer */}
-            <Footer />
+            <motion.div
+              className="w-full px-4 sm:px-6 lg:px-[80px]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+            >
+              <Footer />
+            </motion.div>
           </div>
         </div>
       </main>

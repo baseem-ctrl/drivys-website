@@ -2,9 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
+import AppStoreButtons from '../../components/common/AppStoreButtons';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import AppStoreButtons from '../../components/common/AppStoreButtons';
+import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,44 +44,90 @@ const features = [
   },
 ];
 
+// Motion variants
+const fadeUpVariant = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.8, ease: 'easeOut' },
+  },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
 const Trainer = () => {
+  const sectionRef = useRef(null);
   const downloadRef = useRef(null);
 
   useEffect(() => {
-    // Animate the download section once
     const ctx = gsap.context(() => {
-      const downloadContent = downloadRef.current.querySelector('.content-wrapper');
-      gsap.fromTo(
-        downloadContent,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: downloadRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none', // animate once
-          },
-        }
-      );
+      // Animate download section
+      if (downloadRef.current) {
+        const downloadContent = downloadRef.current.querySelector('.content-wrapper');
+        const downloadHeading = downloadRef.current.querySelector('.heading');
+        const subtext = downloadRef.current.querySelector('.subtext');
+        const appButtons = downloadRef.current.querySelector('.app-buttons');
 
-      // Animate feature cards individually
-      const cards = document.querySelectorAll('.feature-card');
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('animate-fadeInUp');
-              observer.unobserve(entry.target);
-            }
+        gsap.fromTo(
+          downloadContent,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: downloadRef.current, start: 'top 80%' },
+          }
+        );
+
+        gsap.fromTo(
+          [downloadHeading, subtext, appButtons],
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: downloadRef.current, start: 'top 70%' },
+          }
+        );
+      }
+
+      // Animate feature cards
+      if (sectionRef.current) {
+        const cards = sectionRef.current.querySelectorAll('.feature-card');
+        const featureImages = sectionRef.current.querySelectorAll('.feature-image');
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fadeInUp');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+        cards.forEach((card) => observer.observe(card));
+
+        featureImages.forEach((img) => {
+          gsap.to(img, {
+            y: -30,
+            ease: 'none',
+            scrollTrigger: { trigger: img, start: 'top bottom', end: 'bottom top', scrub: 1 },
           });
-        },
-        { threshold: 0.2 }
-      );
-      cards.forEach((card) => observer.observe(card));
-    }, downloadRef);
+        });
+      }
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
@@ -93,185 +140,235 @@ const Trainer = () => {
           name="description"
           content="Discover Drivys mobile app features for driving instructors. Dashboard management, booking system, student progress tracking, ratings & rewards program for professional trainers."
         />
+        <meta
+          property="og:title"
+          content="Trainer Tools - Mobile App Features | Drivys Professional Platform"
+        />
+        <meta
+          property="og:description"
+          content="Discover Drivys mobile app features for driving instructors. Dashboard management, booking system, student progress tracking, ratings & rewards program for professional trainers."
+        />
       </Helmet>
 
       <main className="w-full bg-black min-h-screen text-white">
-        <div className="w-full max-w-[1920px] mx-auto flex flex-col gap-[20px] lg:gap-[30px]">
-          {/* Header */}
-          <div className="px-4 sm:px-6 lg:px-[80px] mt-4">
-            <Header />
-          </div>
+        <div className="w-full max-w-[1920px] mx-auto">
+          <div className="flex flex-col">
+            {/* Header */}
+            <div className="w-full px-4 sm:px-6 lg:px-[80px] mt-4 mb-6">
+              <Header />
+            </div>
 
-          <section className="w-full px-4 sm:px-6 lg:px-[80px]">
+            {/* Hero/App Download Section */}
+            <section className="w-full px-4 sm:px-6 lg:px-[80px] mb-8 md:mb-12 lg:mb-16">
               <div className="w-full max-w-[1760px] mx-auto">
-                <div
-                  className="relative w-full rounded-[24px] overflow-hidden flex items-center"
+                <motion.div
+                  ref={downloadRef}
+                  className="relative w-full rounded-[20px] md:rounded-[30px] lg:rounded-[39px] overflow-hidden h-[90vh] flex items-end"
                   style={{
-                    backgroundImage: 'url(/images/img_image_29.png)',
+                    backgroundImage: 'url(/images/img_image_31.jpeg)',
                     backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    minHeight: '360px', // ensures enough height for centering
+                    backgroundPosition: 'center'
                   }}
+                  variants={fadeUpVariant}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
                 >
-                  <div className="flex flex-col lg:flex-row justify-between items-center w-full px-4 lg:px-[48px]">
-                    {/* Text Area */}
-                    <div className="flex flex-col justify-center items-start w-full lg:w-[58%]">
-                      {/* Breadcrumb */}
-                      <div className="bg-[linear-gradient(180deg,#ffffff19_0%,#ffffff19_50%,#ffffff19_100%)] border border-solid border-transparent rounded-[10px] px-[8px] md:px-[12px] lg:px-[16px] py-[4px] md:py-[6px] lg:py-[8px]">
-                        <p
-                          className="text-base md:text-lg lg:text-xl font-normal leading-[22px] md:leading-[26px] lg:leading-[30px] text-left text-white"
-                          style={{ fontFamily: 'Poppins' }}
-                        >
-                          <span className="text-white">Home / </span>
-                          <span className="text-white font-semibold">About Us</span>
-                        </p>
-                      </div>
-
-                      {/* Main Heading */}
-                      <h1
-                        className="text-3xl sm:text-4xl md:text-6xl font-extrabold leading-[38px] sm:leading-[48px] md:leading-[68px] text-left mt-2"
-                        style={{
-                          fontFamily: 'Poppins',
-                          background:
-                            'linear-gradient(270deg, #cccccc 0%, #ffffff 50%, #cccccc 100%)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                        }}
-                      >
-                        About Drivys
-                      </h1>
-
-                      {/* Description */}
-                      <p
-                        className="text-base md:text-xl lg:text-2xl font-normal leading-[24px] md:leading-[30px] lg:leading-[34px] text-left text-[#94969c] w-full lg:w-[64%] mt-2"
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+                  <div className="relative z-10 flex flex-col justify-end items-center text-center px-6 sm:px-8 md:px-10 lg:px-[48px] pb-[60px] sm:pb-[80px] lg:pb-[100px] w-full">
+                    <div className="flex flex-col gap-2 sm:gap-3 lg:gap-4 items-center content-wrapper">
+                      <h2
+                        className="heading text-[32px] sm:text-[40px] md:text-[50px] lg:text-[60px] font-extrabold leading-[40px] sm:leading-[50px] md:leading-[60px] lg:leading-[68px]"
                         style={{ fontFamily: 'Poppins' }}
                       >
-                        Drivys makes learning to drive simple, safe, and flexible with trusted
-                        instructors and modern tools.
+                        <span className="text-white">Our Driving Journey, </span>
+                        <span className="bg-gradient-to-r from-[#f68b2c] to-[#c05a00] bg-clip-text text-transparent">On the Go</span>
+                      </h2>
+                      <p
+                        className="subtext text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold text-white"
+                        style={{ fontFamily: 'Poppins' }}
+                      >
+                        Download the Drivys Partner app and manage your training sessions professionally
                       </p>
+                      <motion.div className="app-buttons w-full flex justify-center mt-6" variants={fadeUpVariant}>
+                        <AppStoreButtons
+                          className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-auto"
+                          googlePlayLink="https://play.google.com/store/apps/details?id=com.drivys.partner"
+                          appStoreLink="https://apps.apple.com/ae/app/drivys-partner/id6737968293"
+                        />
+                      </motion.div>
                     </div>
-
-                    {/* Hero Image */}
-                    <div className="w-full lg:w-[38%] flex justify-center items-center"></div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </section>
-
-
-          {/* App Download Section */}
-          <section
-            ref={downloadRef}
-            className="w-full px-4 sm:px-6 lg:px-[80px] py-[50px] md:py-[75px] lg:py-[100px]"
-          >
-            <div
-              className="relative w-full max-w-[1760px] mx-auto rounded-[20px] overflow-hidden h-[60vh]"
-              style={{
-                backgroundImage: 'url(/images/img_image_30.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
+            {/* Features Section */}
+            <section
+              ref={sectionRef}
+              className="w-full py-[50px] md:py-[70px] lg:py-[90px] px-4 sm:px-6 lg:px-[80px]"
             >
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+              <div className="w-full max-w-[1760px] mx-auto">
+                <motion.div
+                  className="flex flex-col lg:flex-row gap-[40px] md:gap-[60px] lg:gap-[80px] justify-center"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={staggerContainer}
+                >
+                  {/* Left Column */}
+                  <div className="flex flex-col gap-[30px] md:gap-[45px] lg:gap-[55px] w-full lg:w-[720px] mb-[50px] md:mb-[80px] lg:mb-[100px]">
+                    {features
+                      .filter((f) => f.position === 'left')
+                      .map((feature, idx) => (
+                        <motion.div
+                          key={feature.id}
+                          className="feature-card flex flex-col gap-5 md:gap-7 lg:gap-9 w-full opacity-0"
+                          style={{ animationDelay: `${idx * 0.15}s`, animationFillMode: 'forwards' }}
+                          variants={fadeUpVariant}
+                        >
+                          <div className="feature-image-wrapper overflow-hidden rounded-lg">
+                            <img
+                              src={feature.image}
+                              alt={feature.title}
+                              className="feature-image w-full h-auto object-contain rounded-lg transition-transform duration-500 hover:scale-105"
+                            />
+                          </div>
+                          <div className="flex flex-col gap-2 md:gap-3 lg:gap-4 w-full">
+                            <h3
+                              className="text-[20px] sm:text-[21px] md:text-[22px] lg:text-[24px] font-semibold leading-[28px] sm:leading-[30px] md:leading-[32px] lg:leading-[34px] text-white"
+                              style={{ fontFamily: 'Poppins' }}
+                            >
+                              {feature.title}
+                            </h3>
+                            <p
+                              className="text-[15px] sm:text-[16px] md:text-[17px] lg:text-[18px] font-normal leading-[24px] sm:leading-[26px] md:leading-[28px] lg:leading-[30px] text-white"
+                              style={{ fontFamily: 'Poppins' }}
+                            >
+                              {feature.description}
+                            </p>
+                          </div>
+                        </motion.div>
+                      ))}
+                  </div>
 
-              {/* Content near bottom */}
-              <div className="relative z-10 flex flex-col justify-end items-center text-center h-full px-4 sm:px-6 lg:px-8 pb-10">
-                <h2 className="heading text-[24px] sm:text-[36px] md:text-[44px] lg:text-[50px] font-bold leading-tight text-white">
-                  <span>Our Driving Journey, </span>
-                  <span className="bg-gradient-to-r from-[#f68b2c] to-[#c05a00] bg-clip-text text-transparent bg-[length:200%_100%]">
-          On the Go
-        </span>
-                </h2>
-                <p className="subtext text-[14px] sm:text-[20px] md:text-[24px] lg:text-[26px] font-bold text-white mt-3">
-                  Download Now
-                </p>
-                <div className="w-full flex justify-center app-buttons mt-4">
-                  <AppStoreButtons className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-auto" />
-                </div>
+                  {/* Right Column */}
+                  <div className="flex flex-col gap-[30px] md:gap-[45px] lg:gap-[55px] w-full lg:w-[720px] mt-0 lg:mt-[100px]">
+                    {features
+                      .filter((f) => f.position === 'right')
+                      .map((feature, idx) => (
+                        <motion.div
+                          key={feature.id}
+                          className="feature-card flex flex-col gap-5 md:gap-7 lg:gap-9 w-full opacity-0"
+                          style={{ animationDelay: `${idx * 0.15}s`, animationFillMode: 'forwards' }}
+                          variants={fadeUpVariant}
+                        >
+                          <div className="feature-image-wrapper overflow-hidden rounded-lg">
+                            <img
+                              src={feature.image}
+                              alt={feature.title}
+                              className="feature-image w-full h-auto object-contain rounded-lg transition-transform duration-500 hover:scale-105"
+                            />
+                          </div>
+                          <div className="flex flex-col gap-2 md:gap-3 lg:gap-4 w-full">
+                            <h3
+                              className="text-[20px] sm:text-[21px] md:text-[22px] lg:text-[24px] font-semibold leading-[28px] sm:leading-[30px] md:leading-[32px] lg:leading-[34px] text-white"
+                              style={{ fontFamily: 'Poppins' }}
+                            >
+                              {feature.title}
+                            </h3>
+                            <p
+                              className="text-[15px] sm:text-[16px] md:text-[17px] lg:text-[18px] font-normal leading-[24px] sm:leading-[26px] md:leading-[28px] lg:leading-[30px] text-white"
+                              style={{ fontFamily: 'Poppins' }}
+                            >
+                              {feature.description}
+                            </p>
+                          </div>
+                        </motion.div>
+                      ))}
+                  </div>
+                </motion.div>
               </div>
-            </div>
-          </section>
 
+              {/* CSS - Converted to Global Styles */}
+              <style>{`
+                @keyframes fadeInUp {
+                  0% {
+                    opacity: 0;
+                    transform: translateY(15px);
+                  }
+                  100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
 
-          {/* Features Section */}
-          <section className="w-full py-[50px] md:py-[75px] lg:py-[100px] px-4 sm:px-6 lg:px-[80px] font-[Poppins]">
-            <div className="w-full max-w-[1760px] mx-auto flex flex-col lg:flex-row gap-[40px] md:gap-[60px] lg:gap-[80px] justify-center">
-              {/* Left Column */}
-              <div className="flex flex-col gap-[30px] md:gap-[45px] lg:gap-[55px] w-full lg:w-[720px] mb-[100px] md:mb-[160px] lg:mb-[200px]">
-                {features
-                  .filter((f) => f.position === 'left')
-                  .map((feature, idx) => (
-                    <div
-                      key={feature.id}
-                      className="feature-card flex flex-col gap-5 md:gap-7 lg:gap-9 w-full opacity-0"
-                      style={{ animationDelay: `${idx * 0.15}s`, animationFillMode: 'forwards' }}
-                    >
-                      <img
-                        src={feature.image}
-                        alt={feature.title}
-                        className="w-full h-auto object-contain rounded-lg"
-                      />
-                      <div className="flex flex-col gap-2 md:gap-3 lg:gap-4 w-full">
-                        <h3 className="text-[18px] md:text-[22px] lg:text-[24px] font-semibold text-white">
-                          {feature.title}
-                        </h3>
-                        <p className="text-[15px] md:text-[17px] lg:text-[19px] text-white leading-relaxed">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-              </div>
+                .animate-fadeInUp {
+                  animation: fadeInUp 0.6s ease forwards;
+                }
 
-              {/* Right Column */}
-              <div className="flex flex-col gap-[30px] md:gap-[45px] lg:gap-[55px] w-full lg:w-[720px] mt-0 lg:mt-[160px]">
-                {features
-                  .filter((f) => f.position === 'right')
-                  .map((feature, idx) => (
-                    <div
-                      key={feature.id}
-                      className="feature-card flex flex-col gap-5 md:gap-7 lg:gap-9 w-full opacity-0"
-                      style={{ animationDelay: `${idx * 0.15}s`, animationFillMode: 'forwards' }}
-                    >
-                      <img
-                        src={feature.image}
-                        alt={feature.title}
-                        className="w-full h-auto object-contain rounded-lg"
-                      />
-                      <div className="flex flex-col gap-2 md:gap-3 lg:gap-4 w-full">
-                        <h3 className="text-[18px] md:text-[22px] lg:text-[24px] font-semibold text-white">
-                          {feature.title}
-                        </h3>
-                        <p className="text-[15px] md:text-[17px] lg:text-[19px] text-white leading-relaxed">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
+                .feature-card {
+                  transition: transform 0.3s ease;
+                }
 
-            <style jsx>{`
-              @keyframes fadeInUp {
-                0% {
+                .feature-card:hover {
+                  transform: translateY(-5px);
+                }
+
+                .feature-card h3 {
+                  transition: color 0.3s ease;
+                }
+
+                .feature-card:hover h3 {
+                  background: linear-gradient(90deg, #f68b2c 0%, #c05a00 100%);
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  background-clip: text;
+                }
+
+                .feature-image-wrapper {
+                  position: relative;
+                }
+
+                .feature-image-wrapper::after {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: linear-gradient(
+                    45deg,
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    transparent 70%
+                  );
+                  background-size: 200% 200%;
                   opacity: 0;
-                  transform: translateY(15px);
+                  transition: opacity 0.3s ease;
+                  pointer-events: none;
                 }
-                100% {
-                  opacity: 1;
-                  transform: translateY(0);
-                }
-              }
-              .animate-fadeInUp {
-                animation: fadeInUp 0.6s ease forwards;
-              }
-            `}</style>
-          </section>
 
-          <Footer />
+                .feature-card:hover .feature-image-wrapper::after {
+                  opacity: 1;
+                  animation: shimmer 1.5s ease-in-out;
+                }
+
+                @keyframes shimmer {
+                  0% {
+                    background-position: 200% center;
+                  }
+                  100% {
+                    background-position: -200% center;
+                  }
+                }
+              `}</style>
+            </section>
+
+            {/* Footer */}
+            <div className="w-full px-4 sm:px-6 lg:px-[80px]">
+              <Footer />
+            </div>
+          </div>
         </div>
       </main>
     </>

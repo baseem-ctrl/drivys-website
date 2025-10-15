@@ -42,9 +42,9 @@ const BlogHeroSection = () => {
         <div className="flex flex-col justify-start items-center w-full">
           <Header />
 
-          {/* Hero Content */}
+
           <div className="flex flex-col lg:flex-row justify-start items-center w-full mt-12 sm:mt-16 lg:mt-32 mb-12 sm:mb-16 lg:mb-32">
-            {/* Animation Logo */}
+
             <div className="w-full lg:w-1/2 mb-6 sm:mb-8 lg:mb-0 flex justify-center">
               <motion.img
                 src="/images/img_logo_animation_2.gif"

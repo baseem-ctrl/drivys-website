@@ -7,22 +7,22 @@ const instructors = [
   {
     id: 1,
     name: 'Ahmed Falasi',
-    image: '/images/img_instructor_1.png',
-    specialties: 'Learn from Ahmed and become a confident driver in no time!',
+    image: '/images/Drivys_instructor_1.png',
+    specialties: 'Ahmed’s mastery of driving techniques ensures every lesson is efficient.',
   },
   {
     id: 2,
     name: 'Omar Nuaimi ',
-    image: '/images/img_instructor_3.png',
-        specialties: 'Choose Omar to turn driving lessons into a smooth and enjoyable journey!',
+    image: '/images/Drivys_instructor_3.png',
+        specialties: 'Omar offers expert lessons with years of experience and traffic law mastery.',
 
     
   },
   {
     id: 3,
     name: 'Fatima Shehhi',
-    image: '/images/img_instructor_2.png',
-    specialties: 'Fatima’s expert guidance ensures you master every driving skill safely!',
+    image: '/images/Drivys_instructor_2.png',
+    specialties: 'Fatima’s expert guidance ensures you master every driving skill safely',
   },
 ];
 
@@ -64,7 +64,8 @@ const instructors = [
           </div>
           <div className="lg:w-[28%] mt-4 lg:mt-0 w-full ">
             <p className="text-xs sm:text-sm md:text-base font-poppins font-normal leading-relaxed text-[#94969c]">
-              Wide selection of expertise, language preference, and gender selection.
+              Discover the perfect instructor among our wide selection by skills, language, and gender.
+
             </p>
           </div>
         </div>

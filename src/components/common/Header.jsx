@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
-
-
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation(); // Get current route
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const menuItems = [
     { text: "Home", path: "/" },
@@ -23,11 +22,13 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="w-[90px] sm:w-[110px] lg:w-[118px] flex-shrink-0">
-            <img
-              src="/images/img_logo.svg"
-              alt="Drivys Logo"
-              className="w-full h-auto object-contain"
-            />
+            <Link to="/">
+              <img
+                src="/images/img_logo.svg"
+                alt="Drivys Logo"
+                className="w-full h-auto object-contain"
+              />
+            </Link>
           </div>
 
           {/* Centered Nav (desktop only) */}
@@ -52,13 +53,13 @@ const Header = () => {
             </nav>
           </div>
 
-          {/* Desktop Download Button */}
+          {/* Desktop Join Button */}
           <div className="hidden lg:block">
             <Button
-              text="Download Now"
+              text="Join Now"
               className="bg-gradient-to-r from-[#f68b2c] to-[#c05a00] text-white font-bold px-5 xl:px-8 py-2.5 xl:py-4 rounded-lg hover:opacity-90 transition"
               style={{ fontSize: "16px", lineHeight: "1.6rem" }}
-              onClick={() => {}}
+              onClick={() => navigate("/support")}
             />
           </div>
 
@@ -109,13 +110,16 @@ const Header = () => {
               );
             })}
 
-            {/* Mobile Download Button */}
+            {/* Mobile Join Button */}
             <div className="mt-3">
               <Button
-                text="Download Now"
+                text="Join Now"
                 className="w-full bg-gradient-to-r from-[#f68b2c] to-[#c05a00] text-white font-bold px-4 py-3 rounded-lg hover:opacity-90 transition"
                 style={{ fontSize: "16px" }}
-                onClick={() => {}}
+                onClick={() => {
+                  navigate("/support");
+                  setMenuOpen(false);
+                }}
               />
             </div>
           </div>

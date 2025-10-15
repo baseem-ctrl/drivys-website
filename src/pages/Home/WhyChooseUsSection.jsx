@@ -8,48 +8,46 @@ const WhyChooseUsSection = () => {
   const features = [
     {
       id: 1,
-      icon: "/images/img_fi_3172183.svg",
-      title: "Certified & Trusted",
-      subtitle: "Instructor",
-      description:
-        "Learn from certified instructors you can trust for a safe and confident driving experience.",
-      bgColor: "bg-[#141414]",
+
+      title: 'Flexible Payment Methods',
+      subtitle: 'Pricing',
+      icon: '/images/img_fi_10692577.png',
+      description: 'Learn now, pay later — flexibility that moves with you.',
+      bgColor: 'bg-[#141414]',
     },
     {
       id: 2,
-      icon: "/images/img_fi_2053323.svg",
-      title: "On-demand",
-      subtitle: "Scheduling",
+      icon: '/images/img_fi_2053323.svg',
+      title: 'On-demand',
+      subtitle: 'Scheduling',
       description:
-        "Learn whenever you want with flexible, on-demand driving sessions.",
-      bgColor: "bg-gradient-to-r from-[#f68b2c] to-[#c05a00]",
+        'Take control of your learning with instant, on-demand driving lessons anytime.\n',
+      bgColor: 'bg-gradient-to-r from-[#f68b2c] to-[#c05a00]',
     },
     {
       id: 3,
-      icon: "/images/img_fi_10692577.png",
-      title: "Transparent",
-      subtitle: "Pricing",
-      description:
-        "Clear, upfront pricing with no hidden fees—what you see is what you pay.",
-      bgColor: "bg-[#141414]",
+      icon: '/images/img_fi_3172183.svg',
+      title: 'Certified & Trusted',
+      subtitle: 'Instructor',
+      description: 'Pricing is clear, with no hidden fees; what is displayed is exactly what you pay.',
+      bgColor: 'bg-[#141414]',
     },
     {
       id: 4,
-      icon: "/images/img_fi_3798638.svg",
-      title: "Nationally Recognized",
-      subtitle: "Training",
-      description:
-        "Trusted and recognized across the country for quality driving education.",
-      bgColor: "bg-gradient-to-r from-[#f68b2c] to-[#c05a00]",
+      icon: '/images/img_fi_3798638.svg',
+      title: 'Nationally Recognized',
+      subtitle: 'Training',
+      description: 'Trusted and recognized nationwide, including by official driving schools, for quality driving education.',
+      bgColor: 'bg-gradient-to-r from-[#f68b2c] to-[#c05a00]',
     },
     {
       id: 5,
-      icon: "/images/Layer_1.png",
-      title: "Eco Driving",
-      subtitle: "Experience",
+      icon: '/images/Layer_1.png',
+      title: 'Eco Driving',
+      subtitle: 'Experience',
       description:
-        "Experience driving education with the latest tools and innovative teaching methods.",
-      bgColor: "bg-[#141414]",
+        'Experience driving education with the latest tools and innovative teaching methods.',
+      bgColor: 'bg-[#141414]',
     },
   ];
 
@@ -115,7 +113,7 @@ const WhyChooseUsSection = () => {
               </span>
             </h2>
             <p className="text-lg md:text-xl font-poppins text-[#94969c] lg:w-[80%] leading-relaxed">
-              Your all-in-one platform to manage every step of your driving journey.
+              A new way to learn driving—efficient, safe, and tailored to you .
             </p>
           </div>
         </div>

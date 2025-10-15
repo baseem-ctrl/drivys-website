@@ -6,38 +6,37 @@ import AppStoreButtons from '../../components/common/AppStoreButtons';
 const features = [
   {
     id: 1,
-    icon: '/images/fi_2636402.png',
+    icon: '/images/drivys_booking.gif',
     title: 'Real-time instructor booking',
     description:
-      'Schedule driving lessons instantly with certified instructors, offering flexibility and convenience that fits your lifestyle.'
+      'Schedule driving lessons instantly with certified instructors, offering flexibility and convenience that fits your lifestyle.',
   },
   {
     id: 2,
     imageOnly: true,
     image: '/images/mid.jpeg',
-    hasDownloadSection: true
+    hasDownloadSection: true,
   },
   {
     id: 3,
-    icon: '/images/img_fi_598044.svg',
+    icon: '/images/drivys-time-management.gif',
     title: 'Flexible scheduling',
     description:
-      'Plan your lessons at your convenience for a stress-free learning experience.'
+      'Plan your lessons around your busy life, making learning to drive convenient, stress-free, and fully tailored to you.',
   },
   {
     id: 4,
-    icon: '/images/img_fi_69856.svg',
+    icon: '/images/drivys_analytics.gif',
     title: 'Track your progress',
     description:
-      'Smooth coordination between you and your instructor, enhancing your learning experience.'
+      'Follow your growth, stay aligned with your instructor, track every lesson, and learn efficiently.',
   },
   {
     id: 5,
-    icon: '/images/img_fi_2258567.svg',
+    icon: '/images/drivys-certificate.gif',
     title: 'Digital certifications',
-    description:
-      'Receive accredited digital certifications upon course completion for easy verification.'
-  }
+    description: ' Receive official school-certified digital certificates upon course completion.',
+  },
 ];
 
 const ProgramsSection = () => {
@@ -108,33 +107,20 @@ const ProgramsSection = () => {
                 >
                   <div className="flex flex-col h-full justify-between gap-4">
                     <div>
+                      {/* Icon wrapper (no color change effect now) */}
                       <motion.div
-                        className="w-fit p-4 rounded-[40px] shadow-lg"
+                        className="w-fit p-4 rounded-[60px] shadow-lg"
                         style={{
-                          background:
-                            'linear-gradient(to top right, #ffffff40, #ffffff00)',
-                          transformStyle: 'preserve-3d'
+                          background: 'linear-gradient(to top right, #ffffff40, #ffffff00)',
                         }}
-                        variants={{
-                          initial: {
-                            rotateY: 0,
-                            scale: 1,
-                            background:
-                              'linear-gradient(to top right, #ffffff40, #ffffff00)'
-                          },
-                          hover: {
-                            rotateY: 180,
-                            scale: 1.1,
-                            background:
-                              'linear-gradient(to top right, #f68b2c, #c05a00)'
-                          }
-                        }}
-                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.05 }} // subtle scale only
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                       >
                         <img
                           src={feature.icon}
                           alt={feature.title}
-                          className="w-12 h-12 object-contain"
+                          className="w-16 h-16 md:w-20 md:h-20 object-contain"
                         />
                       </motion.div>
                       <h3 className="text-2xl md:text-3xl font-bold text-white mt-4">
@@ -156,7 +142,14 @@ const ProgramsSection = () => {
                   <h4 className="text-2xl md:text-3xl font-semibold text-white mb-6">
                     Download Now
                   </h4>
-                  <AppStoreButtons className="justify-center mt-4" />
+                  <h5 className="text-2xl md:text-lg font-semibold text-white mb-6">
+                    And Book Your First Lesson Instantly
+                  </h5>
+                  <AppStoreButtons
+                    className="justify-center mt-4"
+                    googlePlayLink="https://play.google.com/store/apps/details?id=com.drivys.mobile"
+                    appStoreLink="https://apps.apple.com/ae/app/drivys/id6736641175"
+                  />{' '}
                 </div>
               )}
             </motion.div>

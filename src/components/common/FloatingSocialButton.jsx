@@ -1,35 +1,52 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn, FaPhone } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const FloatingSocialButton = () => {
   const [open, setOpen] = useState(false);
 
   const socialLinks = [
     {
-      href: "https://wa.me/1234567890",
-      color: "bg-green-500",
+      name: 'Phone',
+      href: 'tel:+971',
+      color: 'bg-blue-500',
+      icon: <FaPhone size={20} />,
+    },
+    {
+      name: 'WhatsApp',
+      href: 'https://wa.me/1234567890',
+      color: 'bg-green-500',
       icon: <FaWhatsapp size={20} />,
     },
     {
-      href: "https://facebook.com/",
-      color: "bg-blue-600",
+      name: 'Facebook',
+      href: 'https://www.facebook.com/Drivysapp/',
+      color: 'bg-blue-600',
       icon: <FaFacebookF size={20} />,
     },
     {
-      href: "https://instagram.com/",
-      color: "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600",
+      name: 'Instagram',
+      href: 'https://www.instagram.com/drivysapp/',
+      color: 'bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600',
       icon: <FaInstagram size={20} />,
     },
     {
-      href: "https://linkedin.com/",
-      color: "bg-blue-700",
+      name: 'X (Twitter)',
+      href: 'https://x.com/drivysapp',
+      color: 'bg-black',
+      icon: <FaXTwitter size={20} />,
+    },
+    {
+      name: 'LinkedIn',
+      href: 'https://www.linkedin.com/company/drivys',
+      color: 'bg-blue-700',
       icon: <FaLinkedinIn size={20} />,
     },
   ];
 
   return (
-    <div className="fixed bottom-10 right-10 flex flex-col items-end z-50">
+    <div className="fixed bottom-28 right-2 flex flex-col items-end z-50">
       {/* Floating Toggle Button */}
       <motion.button
         onClick={() => setOpen(!open)}
@@ -38,6 +55,8 @@ const FloatingSocialButton = () => {
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: "spring", stiffness: 300 }}
+        aria-label={open ? "Close contact menu" : "Open contact menu"}
+        aria-expanded={open}
       >
         {open ? "Close" : "Contact Us"}
       </motion.button>
@@ -64,6 +83,7 @@ const FloatingSocialButton = () => {
                 }}
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
+                aria-label={`Contact us on ${link.name}`}
               >
                 {link.icon}
               </motion.a>

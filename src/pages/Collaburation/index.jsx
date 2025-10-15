@@ -31,6 +31,18 @@ const fadeUpVariant = {
 };
 
 const Partners = () => {
+  // Function to determine if item needs right border
+  const needsRightBorder = (index, cols) => {
+    return (index % cols) < (cols - 1);
+  };
+
+  // Function to determine if item needs bottom border
+  const needsBottomBorder = (index, totalItems, cols) => {
+    const row = Math.floor(index / cols);
+    const totalRows = Math.ceil(totalItems / cols);
+    return row < (totalRows - 1);
+  };
+
   return (
     <>
       <Helmet>
@@ -42,85 +54,270 @@ const Partners = () => {
       </Helmet>
 
       <main className="w-full bg-black min-h-screen text-white">
-        <div className="w-full max-w-[1920px] mx-auto flex flex-col gap-[20px]">
-          <div className="w-full px-4 sm:px-6 lg:px-[80px]">
-            <Header />
-          </div>
+        <style>{`
+          .gradient-border-right {
+            position: relative;
+          }
+          .gradient-border-right::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, 
+              rgba(255, 102, 0, 0) 0%, 
+              rgba(255, 102, 0, 0.8) 30%, 
+              rgba(255, 102, 0, 1) 50%, 
+              rgba(255, 102, 0, 0.8) 70%, 
+              rgba(255, 102, 0, 0) 100%
+            );
+          }
+          
+          .gradient-border-bottom {
+            position: relative;
+          }
+          .gradient-border-bottom::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+              rgba(255, 102, 0, 0) 0%, 
+              rgba(255, 102, 0, 0.8) 30%, 
+              rgba(255, 102, 0, 1) 50%, 
+              rgba(255, 102, 0, 0.8) 70%, 
+              rgba(255, 102, 0, 0) 100%
+            );
+          }
+          
+          .gradient-border-both {
+            position: relative;
+          }
+          .gradient-border-both::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, 
+              rgba(255, 102, 0, 0) 0%, 
+              rgba(255, 102, 0, 0.8) 30%, 
+              rgba(255, 102, 0, 1) 50%, 
+              rgba(255, 102, 0, 0.8) 70%, 
+              rgba(255, 102, 0, 0) 100%
+            );
+          }
+          .gradient-border-both::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+              rgba(255, 102, 0, 0) 0%, 
+              rgba(255, 102, 0, 0.8) 30%, 
+              rgba(255, 102, 0, 1) 50%, 
+              rgba(255, 102, 0, 0.8) 70%, 
+              rgba(255, 102, 0, 0) 100%
+            );
+          }
+        `}</style>
 
-          {/* Hero Section */}
-          <section className="w-full px-4 sm:px-6 lg:px-[80px]">
-            <div className="w-full max-w-[1760px] mx-auto">
-              <div
-                className="relative w-full rounded-[24px] overflow-hidden flex items-center"
-                style={{
-                  backgroundImage: 'url(/images/img_image_29.png)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  minHeight: '360px',
-                }}
-              >
-                <div className="flex flex-col lg:flex-row justify-between items-center w-full px-4 lg:px-[48px]">
-                  <div className="flex flex-col justify-center items-start w-full lg:w-[58%]">
-                    <div className="bg-white/10 rounded-[10px] px-4 py-2">
-                      <p className="text-white">
-                        <span>Home / </span>
-                        <span className="font-semibold">Schools</span>
+        <div className="w-full max-w-[1920px] mx-auto">
+          <div className="flex flex-col">
+            {/* Header */}
+            <div className="w-full px-4 sm:px-6 lg:px-[80px] mt-4 mb-6">
+              <Header />
+            </div>
+
+            {/* Hero Section */}
+            <section className="w-full px-4 sm:px-6 lg:px-[80px] mb-8 md:mb-12 lg:mb-16">
+              <div className="w-full max-w-[1760px] mx-auto">
+                <div
+                  className="relative w-full rounded-[20px] md:rounded-[30px] lg:rounded-[39px] overflow-hidden flex items-center"
+                  style={{
+                    backgroundImage: 'url(/images/mobile-bg.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    minHeight: '360px',
+                  }}
+                >
+                  <div className="flex flex-col lg:flex-row justify-between items-center w-full px-6 sm:px-8 md:px-10 lg:px-[48px] py-8 md:py-12 lg:py-16">
+                    <div className="flex flex-col justify-center items-start w-full lg:w-[58%]">
+                      <div className="bg-white/10 rounded-[10px] px-4 py-2">
+                        <p className="text-white text-sm md:text-base">
+                          <span>Home / </span>
+                          <span className="font-semibold">Schools</span>
+                        </p>
+                      </div>
+                      <h1
+                        className="text-[32px] sm:text-[40px] md:text-[50px] lg:text-[60px] font-extrabold mt-4 leading-[40px] sm:leading-[50px] md:leading-[60px] lg:leading-[68px]"
+                        style={{
+                          fontFamily: 'Poppins',
+                          background:
+                            'linear-gradient(270deg, #cccccc 0%, #ffffff 50%, #cccccc 100%)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                        }}
+                      >
+                        Our Partner Schools
+                      </h1>
+                      <p className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] text-[#94969c] w-full lg:w-[64%] mt-4">
+                        Drivys partners with leading driving schools to ensure safe, modern, and
+                        flexible learning.
                       </p>
                     </div>
-                    <h1
-                      className="text-3xl sm:text-4xl md:text-6xl font-extrabold mt-2"
-                      style={{
-                        fontFamily: 'Poppins',
-                        background:
-                          'linear-gradient(270deg, #cccccc 0%, #ffffff 50%, #cccccc 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                      }}
-                    >
-                      Our Partner Schools
-                    </h1>
-                    <p className="text-base md:text-xl lg:text-2xl text-[#94969c] w-full lg:w-[64%] mt-2">
-                      Drivys partners with leading driving schools to ensure safe, modern, and
-                      flexible learning.
-                    </p>
+                    <div className="w-full lg:w-[38%] flex justify-center items-center"></div>
                   </div>
-                  <div className="w-full lg:w-[38%] flex justify-center items-center"></div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* Logos Grid */}
-          <section className="w-full px-4 sm:px-6 lg:px-[80px]">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 border-t border-l border-[#ff6600]">
-              {logos.map((logo, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeUpVariant}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="relative flex items-center justify-center bg-black border-b border-r border-[#ff6600] p-6 group"
-                >
-                  {/* Gray Logo */}
-                  <img
-                    src={logo.gray}
-                    alt={logo.alt}
-                    className="w-32 h-auto transition-opacity duration-500 group-hover:opacity-0"
-                  />
-                  {/* Color Logo */}
-                  <img
-                    src={logo.color}
-                    alt={logo.alt}
-                    className="w-32 h-auto absolute transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                  />
-                </motion.div>
-              ))}
-            </div>
-          </section>
+            {/* Logos Grid Section */}
+            <section className="w-full px-4 sm:px-6 lg:px-[80px] py-[50px] md:py-[70px] lg:py-[90px]">
+              <div className="w-full max-w-[1760px] mx-auto">
+                {/* Desktop Grid (4 columns) */}
+                <div className="hidden lg:grid lg:grid-cols-4">
+                  {logos.map((logo, index) => {
+                    const hasRight = needsRightBorder(index, 4);
+                    const hasBottom = needsBottomBorder(index, logos.length, 4);
+                    let borderClass = '';
 
-          <Footer />
+                    if (hasRight && hasBottom) {
+                      borderClass = 'gradient-border-both';
+                    } else if (hasRight) {
+                      borderClass = 'gradient-border-right';
+                    } else if (hasBottom) {
+                      borderClass = 'gradient-border-bottom';
+                    }
+
+                    return (
+                      <motion.div
+                        key={index}
+                        variants={fadeUpVariant}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        className={`relative flex items-center justify-center bg-black p-12 group ${borderClass}`}
+                        style={{ minHeight: '200px' }}
+                      >
+                        {/* Gray Logo */}
+                        <img
+                          src={logo.gray}
+                          alt={logo.alt}
+                          className="w-40 h-auto transition-all duration-500 group-hover:opacity-0 filter brightness-75"
+                          style={{ maxWidth: '160px' }}
+                        />
+                        {/* Color Logo on Hover */}
+                        <img
+                          src={logo.color}
+                          alt={logo.alt}
+                          className="w-40 h-auto absolute transition-all duration-500 opacity-0 group-hover:opacity-100"
+                          style={{ maxWidth: '160px' }}
+                        />
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* Tablet Grid (3 columns) */}
+                <div className="hidden sm:grid sm:grid-cols-3 lg:hidden">
+                  {logos.map((logo, index) => {
+                    const hasRight = needsRightBorder(index, 3);
+                    const hasBottom = needsBottomBorder(index, logos.length, 3);
+                    let borderClass = '';
+
+                    if (hasRight && hasBottom) {
+                      borderClass = 'gradient-border-both';
+                    } else if (hasRight) {
+                      borderClass = 'gradient-border-right';
+                    } else if (hasBottom) {
+                      borderClass = 'gradient-border-bottom';
+                    }
+
+                    return (
+                      <motion.div
+                        key={index}
+                        variants={fadeUpVariant}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        className={`relative flex items-center justify-center bg-black p-8 group ${borderClass}`}
+                        style={{ minHeight: '180px' }}
+                      >
+                        {/* Gray Logo */}
+                        <img
+                          src={logo.gray}
+                          alt={logo.alt}
+                          className="w-32 h-auto transition-all duration-500 group-hover:opacity-0 filter brightness-75"
+                        />
+                        {/* Color Logo on Hover */}
+                        <img
+                          src={logo.color}
+                          alt={logo.alt}
+                          className="w-32 h-auto absolute transition-all duration-500 opacity-0 group-hover:opacity-100"
+                        />
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* Mobile Grid (2 columns) */}
+                <div className="grid grid-cols-2 sm:hidden">
+                  {logos.map((logo, index) => {
+                    const hasRight = needsRightBorder(index, 2);
+                    const hasBottom = needsBottomBorder(index, logos.length, 2);
+                    let borderClass = '';
+
+                    if (hasRight && hasBottom) {
+                      borderClass = 'gradient-border-both';
+                    } else if (hasRight) {
+                      borderClass = 'gradient-border-right';
+                    } else if (hasBottom) {
+                      borderClass = 'gradient-border-bottom';
+                    }
+
+                    return (
+                      <motion.div
+                        key={index}
+                        variants={fadeUpVariant}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        className={`relative flex items-center justify-center bg-black p-6 group ${borderClass}`}
+                        style={{ minHeight: '150px' }}
+                      >
+                        {/* Gray Logo */}
+                        <img
+                          src={logo.gray}
+                          alt={logo.alt}
+                          className="w-24 h-auto transition-all duration-500 group-hover:opacity-0 filter brightness-75"
+                        />
+                        {/* Color Logo on Hover */}
+                        <img
+                          src={logo.color}
+                          alt={logo.alt}
+                          className="w-24 h-auto absolute transition-all duration-500 opacity-0 group-hover:opacity-100"
+                        />
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
+
+            {/* Footer */}
+            <div className="w-full px-4 sm:px-6 lg:px-[80px]">
+              <Footer />
+            </div>
+          </div>
         </div>
       </main>
     </>
