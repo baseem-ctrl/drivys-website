@@ -151,7 +151,7 @@ const CardContent = ({ pkg, isMobile = false }) => (
         <p className="text-gray-400 text-sm md:text-base">{pkg.description}</p>
       </div>
 
-      <Button
+      {/* <Button
         text={`Choose ${pkg.name.split(" ")[0]}`}
         className={`text-white text-[16px] px-6 py-3 rounded-sm w-full shadow-lg backdrop-blur-sm ${
           isMobile
@@ -160,7 +160,7 @@ const CardContent = ({ pkg, isMobile = false }) => (
         }`}
         onClick={() => {}}
         style={{ fontSize: "18px" }}
-      />
+      /> */}
 
       <div className="w-full h-[1px] bg-gray-600 my-6" />
 
